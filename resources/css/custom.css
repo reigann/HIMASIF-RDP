@@ -1,0 +1,22 @@
+/* Animasi kustom */
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.custom-slide-in {
+    animation: slideIn 1s ease-out;
+}
+
+/* Gaya tambahan untuk foto */
+.rounded {
+    border-radius: 15px !important;
+}
+
+.shadow {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
