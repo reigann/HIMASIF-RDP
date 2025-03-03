@@ -14,7 +14,7 @@
                 Jelajahi Galeri
             </a>
         </div>
-        <div class="position-absolute w-100 h-100 top-0 start-0" style="background: url('{{ asset('images/logohimasif.png') }}') no-repeat center/cover; opacity: 0.15;"></div>
+        <div class="position-absolute w-100 h-100 top-0 start-0" style="background: url('{{ asset('images/himasif.JPG') }}') no-repeat center/cover; opacity: 0.15;"></div>
     </section>
 
     <!-- Foto Galeri -->
