@@ -93,6 +93,6 @@
             background: #1e3c72;
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
+            }
     </style>
 @endsection
