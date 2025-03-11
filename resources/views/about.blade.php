@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Tentang Kami</h1>
-    <p>Ini adalah halaman tentang kami.</p>
+<h1>Tentang HIMASIF</h1>
+<p>Deskripsi tentang Himpunan Mahasiswa Sistem Informasi...</p>
 @endsection
