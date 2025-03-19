@@ -1,0 +1,233 @@
+/* Teks VISI & MISI (Disesuaikan dengan Prioritas) */
+.about-hero .vision-mission-text {
+    font-size: 16rem !important; /* Diperbesar sedikit untuk tampilan keren */
+    font-weight: 900;
+    color: #fff !important;
+    text-transform: uppercase;
+    font-family: 'fontHome', sans-serif !important;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4) !important;
+    line-height: 1;
+    text-align: center;
+    padding: 0.75rem; /* Sedikit diperbesar untuk proporsi */
+    letter-spacing: 1.5px; /* Ditambah untuk kesan elegan */
+    animation: fadeIn 1.5s ease-in-out;
+    max-width: 90% !important; /* Dikurangi sedikit agar muat lebih baik */
+    margin: 0 auto;
+    margin-top: -5rem;
+    transform: translateY(-2rem); /* Menggeser teks ke atas sedikit */
+}
+
+/* Animasi Fade In */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* About Info Section (Tetap Sama) */
+.about-info-section {
+    background-color: #023047;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.about-info-section .info-content {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.section-title {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 900;
+    color: #A3C9FF;
+    text-transform: uppercase;
+    margin: 2rem 0;
+    line-height: 1.1;
+    font-family: 'fontSection', sans-serif;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    animation: slideUp 1s ease-in-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.about-info-section .description {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: #D1E5FF;
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    line-height: 1.8;
+    font-family: 'fontHome', sans-serif;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.mission-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    counter-reset: mission-counter;
+}
+
+.mission-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 1.5rem;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.mission-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.mission-item::before {
+    content: counter(mission-counter);
+    counter-increment: mission-counter;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #00A8CC;
+    background: #fff;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.mission-item:hover::before {
+    transform: scale(1.1);
+}
+
+.mission-item p {
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+    color: #D1E5FF;
+    margin: 0;
+    line-height: 1.6;
+    font-family: 'fontHome', sans-serif;
+}
+
+/* Responsivitas */
+@media (max-width: 1200px) {
+    .about-hero {
+        min-height: calc(90vh + 70px);
+        padding-top: 70px;
+    }
+    .vision-mission-text {
+        font-size: clamp(8rem, 10vw, 10rem) !important; /* Sesuaikan ukuran untuk layar lebih kecil */
+        transform: translateY(-1.5rem) !important; /* Sedikit lebih kecil gesernya */
+    }
+}
+
+@media (max-width: 992px) {
+    .about-hero {
+        min-height: calc(80vh + 60px);
+        padding-top: 60px;
+    }
+    .about-info-section {
+        padding: 3rem 1rem;
+    }
+    .section-title {
+        font-size: 3.5rem;
+    }
+    .about-info-section .description {
+        font-size: 1.1rem;
+        padding: 1rem;
+    }
+    .mission-item {
+        gap: 1rem;
+    }
+    .mission-item::before {
+        font-size: 1.5rem;
+        width: 35px;
+        height: 35px;
+    }
+    .mission-item p {
+        font-size: 1rem;
+    }
+    .vision-mission-text {
+        font-size: clamp(6rem, 8vw, 8rem) !important;
+        transform: translateY(-1.2rem) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-hero {
+        min-height: calc(70vh + 50px);
+        padding-top: 50px;
+    }
+    .vision-mission-text {
+        font-size: clamp(4rem, 6vw, 6rem) !important;
+        transform: translateY(-1rem) !important;
+    }
+    .about-info-section {
+        padding: 2rem 1rem;
+    }
+    .section-title {
+        font-size: 2.5rem;
+    }
+    .about-info-section .description {
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+    .mission-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    .mission-item::before {
+        width: 30px;
+        height: 30px;
+        font-size: 1.2rem;
+    }
+    .mission-item p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-hero {
+        min-height: calc(60vh + 40px);
+        padding-top: 40px;
+    }
+    .vision-mission-text {
+        font-size: clamp(2rem, 4vw, 4rem) !important;
+        transform: translateY(-0.8rem) !important;
+    }
+    .section-title {
+        font-size: 2rem;
+    }
+    .about-info-section .description {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+    .mission-item {
+        padding: 1rem;
+    }
+    .mission-item::before {
+        width: 25px;
+        height: 25px;
+        font-size: 1rem;
+    }
+    .mission-item p {
+        font-size: 0.8rem;
+    }
+}

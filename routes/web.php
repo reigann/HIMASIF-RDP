@@ -10,8 +10,8 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/agenda', function () {
-    return view('agenda');
+Route::get('/struktur', function () {
+    return view('struktur');
 });
 
 Route::get('/event', function () {
