@@ -9,83 +9,60 @@
 
     <!-- Section Foto yang Bisa Discroll -->
     <div class="photo-section">
-        <img src="{{ asset('images/himasif.JPG') }}" alt="HIMASIF Group Photo" class="full-width-photo grayscale">
+        <img src="{{ asset('images/himasif.svg') }}" alt="HIMASIF Group Photo">
     </div>
 
-    <!-- Section Informasi dengan Background Biru -->
-    <div class="info-section">
+    <!-- Section Informasi Baru (Berdasarkan Gambar) -->
+    <div class="info-custom-section">
         <div class="info-content">
-            <div class="info-text">
-                <p>HIMASIF adalah organisasi mahasiswa yang mewadahi aspirasi, pengembangan mahasiswa keilmuan, dan kreativitas mahasiswa Sistem Informasi dalam bidang teknologi, manajemen, dan komunikasi akademik.</p>
-                <p class="slogan">selen tonya _</p>
+            <h2 class="himasif-title">HIMASIF</h2>
+            <p class="period-text">periode 2025</p>
+            <p class="description">
+                HIMASIF adalah organisasi mahasiswa yang mewadahi aspirasi, pengembangan mahasiswa keilmuan, dan kreativitas mahasiswa Sistem Informasi dalam bidang teknologi, manajemen, dan komunikasi akademik.
+            </p>
+            <div class="separator"></div>
+            <h3 class="total-pengurus">total PENGURUS</h3>
+            <div class="pengurus-numbers">
+                <span class="number">25</span> | <span class="number">9</span> | <span class="number">17</span>
             </div>
-            <h2 class="period">periode 2025</h2>
+            <div class="pengurus-labels">
+                <span class="label">magang</span> <span class="label">divisi</span> <span class="label">programmer</span>
+            </div>
         </div>
     </div>
 
-    <!-- Section Statistik Pengurus -->
-    <div class="stats-section">
-        <div class="stats-content">
-            <div class="stats-numbers">
-                <div class="stat-item">
-                    <h3>25</h3>
-                    <p>anggota</p>
+    <!-- Section Galeri Baru (Berdasarkan Gambar) -->
+    <div class="gallery-section">
+        <div class="gallery-content">
+            <img src="{{ asset('images/himasif.svg') }}" alt="HIMASIF Group Photo" class="group-photo">
+            <h2 class="gallery-title">PROFESIONAL & KEKELUARGAAN</h2>
+            <p class="gallery-subtitle">galeri kami</p>
+        </div>
+    </div>
+
+    <!-- Sorotan Section -->
+    <div class="sorotan-section">
+        <div class="sorotan-content">
+            <div class="sorotan-text">
+                <h2 class="sorotan-title">SOROTAN</h2>
+                <p class="sorotan-subtitle">bisa kamu kunjungi</p>
+            </div>
+            <div class="sorotan-grid">
+                <div class="sorotan-box">
+                    <img src="{{ asset('images/placeholder.jpg') }}" alt="Sorotan 1">
                 </div>
-                <div class="stat-item">
-                    <h3>9</h3>
-                    <p>divisi</p>
+                <div class="sorotan-box">
+                    <img src="{{ asset('images/placeholder.jpg') }}" alt="Sorotan 2">
                 </div>
-                <div class="stat-item">
-                    <h3>17</h3>
-                    <p>program kerja</p>
+                <div class="sorotan-box">
+                    <img src="{{ asset('images/placeholder.jpg') }}" alt="Sorotan 3">
+                </div>
+                <div class="sorotan-box">
+                    <img src="{{ asset('images/placeholder.jpg') }}" alt="Sorotan 4">
                 </div>
             </div>
-            <h2 class="total-pengurus">TOTAL PENGURUS</h2>
         </div>
     </div>
 
-    <!-- Section Profesional & Kekeluargaan -->
-    <div class="professional-section">
-        <div class="professional-content">
-            <h2 class="professional-title">PROFESIONAL & KEKELUARGAAN</h2>
-            <a href="/galeri" class="gallery-link">galeri kami →</a>
-        </div>
-    </div>
-
-    <!-- Konten Utama -->
-    <section class="content">
-        <div class="section">
-            <h2>Himpunan</h2>
-            <p>Informasi tentang HIMASIF...</p>
-        </div>
-        <div class="section">
-            <h2>Mahasiswa</h2>
-            <p>Informasi tentang anggota dan kegiatan mahasiswa...</p>
-        </div>
-        <div class="section">
-            <h2>Sistem</h2>
-            <p>Informasi tentang sistem informasi...</p>
-        </div>
-        <div class="section">
-            <h2>Informasi</h2>
-            <p>Berita dan pengumuman terbaru...</p>
-        </div>
-    </section>
-
-    <!-- Tambahkan Style untuk Professional Section -->
-    <style>
-        .professional-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('{{ asset('images/himasif.JPG') }}');
-            background-size: cover;
-            background-position: center;
-            filter: blur(10px);
-            z-index: 1;
-        }
-    </style>
+    
 @endsection

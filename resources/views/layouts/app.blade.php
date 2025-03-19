@@ -1,17 +1,11 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Himpunan Mahasiswa Sistem Informasi (HIMASIF) - Website Resmi">
-    <meta name="author" content="HIMASIF">
-    <title>{{ $title ?? 'HIMASIF' }}</title>
-    
-    <!-- Favicon (opsional, jika kamu punya logo) -->
-    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
-
-    <!-- Memuat CSS dan JS menggunakan Vite -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <title>HIMASIF</title>
+    @vite('resources/css/app.css')
+    @stack('styles') <!-- Tempat untuk CSS spesifik per halaman -->
 </head>
 <body>
     <!-- Navbar -->
@@ -19,26 +13,45 @@
         <div class="logo">
             <a href="/">HIMASIF</a>
         </div>
+        <div class="center-logo">
+            <a href="/">
+                <img src="{{ asset('images/logohimasif.png') }}" alt="HIMASIF Logo" class="logo-img">
+            </a>
+        </div>
         <ul class="nav-links">
-            <li><a href="/tentang">TENTANG</a></li>
-            <li><a href="/struktur">STRUKTUR</a></li>
-            <li><a href="/galeri">GALERI</a></li>
-            <li><a href="/merch">MERCH</a></li>
-            <li><a href="/berita">BERITA</a></li>
+            <li><a href="/about">Tentang</a></li>
+            <li><a href="/struktur">Struktur</a></li>
+            <li><a href="/galeri">Galeri</a></li>
+            <li><a href="/merch">Merch</a></li>
+            <li><a href="/berita">Berita</a></li>
         </ul>
     </nav>
 
-    <!-- Konten Utama -->
-    <main>
-        @yield('content')
-    </main>
+    <!-- Content -->
+    @yield('content')
 
     <!-- Footer -->
     <footer>
-        <p>© 2025 HIMASIF. All rights reserved.</p>
+        <div class="footer-content">
+            <div class="footer-left">
+                <p class="footer-label">Slogan</p>
+                <h2 class="slogan">WE MAKE IT HAPPEN</h2>
+                <p class="slogan-number">360</p>
+            </div>
+            <div class="footer-right">
+                <p class="footer-label">Acara Mendatang</p>
+                <ul class="event-list">
+                    <li><a href="/visi-misi">VISI & MISI <span class="arrow">→</span></a></li>
+                    <li><a href="/sejarah">SEJARAH <span class="arrow">→</span></a></li>
+                    <li><a href="/logo">LOGO <span class="arrow">→</span></a></li>
+                    <li><a href="/berita">BERITA <span class="arrow">→</span></a></li>
+                    <li><a href="/merch">MERCH <span class="arrow">→</span></a></li>
+                    <li><a href="/struktur">STRUKTUR <span class="arrow">→</span></a></li>
+                </ul>
+            </div>
+        </div>
     </footer>
 
-    <!-- Placeholder untuk script tambahan (opsional) -->
-    @yield('scripts')
+    @vite('resources/js/app.js')
 </body>
 </html>
