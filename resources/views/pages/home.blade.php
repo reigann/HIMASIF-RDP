@@ -9,115 +9,171 @@
 @section('content')
 @include('partials.navbar')
 
-<!-- Landing Section -->
-<section class="section-full d-flex align-items-center bg-primary-gradient" id="landing">
-    <canvas id="bgCanvas"></canvas>
-    <div class="container">
-        <div class="row min-vh-100 align-items-center">
-            <div class="col-12 text-center">
-                <div class="title-container">
-                    <h1 class="himasif-title">HIMASIF</h1>
-                    <h2 class="himasif-subtitle">Himpunan Mahasiswa <span class="sistem">Sistem</span> Informasi</h2>
-                    
-                    <div class="bottom-info">
-                        <span>© 2025 HIMASIF</span>
-                        <div class="mouse-scroll">
-                            <div class="mouse-wheel"></div>
-                        </div>
-                        <span>WEBSITE RESMI HIMASIF</span>
-                    </div>
+<div id="home-page">
+    <!-- Landing Section -->
+    <section id="landing">
+        <!-- Background Container -->
+        <div class="background-container">
+            <!-- Noise Overlay -->
+            <div class="noise-overlay"></div>
+            
+            <!-- Curved Lines -->
+            <div class="curved-lines">
+                <!-- SVG Curved Lines -->
+                <svg class="curved-line line1" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0,500 Q250,350 500,500 T1000,500" fill="none" stroke-width="2" />
+                </svg>
+                <svg class="curved-line line2" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0,400 Q250,250 500,400 T1000,400" fill="none" stroke-width="2" />
+                </svg>
+                <svg class="curved-line line3" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0,600 Q250,450 500,600 T1000,600" fill="none" stroke-width="2" />
+                </svg>
+                <svg class="curved-line line4" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0,300 Q250,150 500,300 T1000,300" fill="none" stroke-width="2" />
+                </svg>
+                <svg class="curved-line line5" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0,700 Q250,550 500,700 T1000,700" fill="none" stroke-width="2" />
+                </svg>
+                <svg class="curved-line line6" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0,200 Q250,50 500,200 T1000,200" fill="none" stroke-width="2" />
+                </svg>
+                <svg class="curved-line line7" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0,800 Q250,650 500,800 T1000,800" fill="none" stroke-width="2" />
+                </svg>
+                <svg class="curved-line line8" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0,100 Q250,-50 500,100 T1000,100" fill="none" stroke-width="2" />
+                </svg>
+            </div>
+        </div>
+        
+        <div class="landing-content">
+            <h1 class="hero-text">HIMASIF</h1>
+            <span class="subtitle">Himpunan Mahasiswa <span>Sistem</span> Informasi</span>
+        </div>
+        
+        <div class="bottom-info">
+            <div class="copyright"> HIMASIF 2025</div>
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+            </div>
+            <div class="website-info">WEBSITE RESMI HIMASIF UPJ</div>
+        </div>
+    </section>
+
+    <!-- Foto Section -->
+    <section id="foto" class="py-5 bg-light">
+        <div class="section-content">
+            <div class="section-header">
+                <h2>Galeri Foto</h2>
+                <p>Dokumentasi kegiatan HIMASIF RDP</p>
+            </div>
+            <div class="foto-grid">
+                <div class="foto-item">
+                    <!-- Placeholder for foto 1 -->
+                    <p>Kegiatan 1</p>
+                </div>
+                <div class="foto-item">
+                    <!-- Placeholder for foto 2 -->
+                    <p>Kegiatan 2</p>
+                </div>
+                <div class="foto-item">
+                    <!-- Placeholder for foto 3 -->
+                    <p>Kegiatan 3</p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Photo Section -->
-<section class="section-full d-flex align-items-center bg-primary-gradient" id="photo">
-    <div class="container-fluid p-0">
-        <div class="row min-vh-100 align-items-center">
-            <div class="col-12">
-                <div class="photo-wrapper text-center">
-                    <img src="{{ asset('images/himasif.svg') }}" 
-                         alt="Foto Bersama HIMASIF" 
-                         class="himasif-hero-image">
+    <!-- Periode HIMASIF Section -->
+    <section id="periode" class="py-5">
+        <div class="section-content">
+            <div class="section-header">
+                <h2>Periode HIMASIF</h2>
+                <p>Kepengurusan HIMASIF RDP 2023/2024</p>
+            </div>
+            <div class="periode-content">
+                <div class="visi-box">
+                    <h3>Visi</h3>
+                    <p>Menjadikan HIMASIF sebagai wadah yang aktif, inovatif, dan bermanfaat bagi mahasiswa Sistem Informasi</p>
+                </div>
+                <div class="misi-box">
+                    <h3>Misi</h3>
+                    <p>Mengembangkan potensi mahasiswa Sistem Informasi dalam bidang akademik dan non-akademik</p>
+                    <p>Membangun hubungan yang baik antar mahasiswa Sistem Informasi</p>
+                    <p>Menjadi jembatan antara mahasiswa dengan pihak program studi</p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Struktur Section -->
-<section class="section-full d-flex align-items-center bg-dark-blue" id="struktur">
-    <div class="container">
-        <div class="row min-vh-100 align-items-center">
-            <div class="col-12">
-                <h2 class="himasif-section-title text-blue-light mb-5">Struktur Organisasi</h2>
-                <div class="struktur-wrapper text-center">
-                    <img src="{{ asset('images/struktur-organisasi.jpg') }}" 
-                         alt="Struktur Organisasi HIMASIF" 
-                         class="img-struktur rounded shadow-light">
+    <!-- Total Pengurus Section -->
+    <section id="pengurus" class="py-5 bg-light">
+        <div class="section-content">
+            <div class="section-header">
+                <h2>Total Pengurus</h2>
+                <p>Struktur Organisasi HIMASIF RDP</p>
+            </div>
+            <div class="pengurus-grid">
+                <div class="pengurus-item">
+                    <h4>Ketua</h4>
+                    <p>1 Orang</p>
+                </div>
+                <div class="pengurus-item">
+                    <h4>Wakil Ketua</h4>
+                    <p>1 Orang</p>
+                </div>
+                <div class="pengurus-item">
+                    <h4>Sekretaris</h4>
+                    <p>2 Orang</p>
+                </div>
+                <div class="pengurus-item">
+                    <h4>Bendahara</h4>
+                    <p>2 Orang</p>
+                </div>
+                <div class="pengurus-item">
+                    <h4>Divisi Akademik</h4>
+                    <p>5 Orang</p>
+                </div>
+                <div class="pengurus-item">
+                    <h4>Divisi Humas</h4>
+                    <p>5 Orang</p>
+                </div>
+                <div class="pengurus-item">
+                    <h4>Divisi Acara</h4>
+                    <p>5 Orang</p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Total Pengurus Section -->
-<section class="section-full d-flex align-items-center bg-dark-blue" id="pengurus">
-    <div class="container">
-        <div class="row min-vh-100 align-items-center">
-            <div class="col-12">
-                <h2 class="himasif-section-title text-blue-light">Total Pengurus</h2>
-                <div class="row justify-content-center g-4">
-                    <div class="col-md-4">
-                        <div class="stat-card text-center">
-                            <span class="stat-number text-blue-light">30</span>
-                            <p class="stat-label text-blue-light">Pengurus Inti</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="stat-card text-center">
-                            <span class="stat-number text-blue-light">50</span>
-                            <p class="stat-label text-blue-light">Staff</p>
-                        </div>
-                    </div>
+    <!-- Sorotan Section -->
+    <section id="sorotan" class="py-5">
+        <div class="section-content">
+            <div class="section-header">
+                <h2>Sorotan</h2>
+                <p>Kegiatan Unggulan HIMASIF RDP</p>
+            </div>
+            <div class="sorotan-grid">
+                <div class="sorotan-item">
+                    <h4>Seminar Teknologi</h4>
+                    <p>Seminar tentang perkembangan teknologi terkini di bidang Sistem Informasi</p>
+                </div>
+                <div class="sorotan-item">
+                    <h4>Workshop Coding</h4>
+                    <p>Pelatihan pengembangan aplikasi web dan mobile untuk mahasiswa Sistem Informasi</p>
+                </div>
+                <div class="sorotan-item">
+                    <h4>Kompetisi IT</h4>
+                    <p>Ajang kompetisi untuk mengasah kemampuan mahasiswa dalam bidang IT</p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 
-<!-- Periode HIMASIF Section -->
-<section class="himasif-content-section">
-    <div class="container mx-auto px-4">
-        <h2 class="himasif-section-title">Periode HIMASIF</h2>
-        <div class="himasif-period-info mt-8">
-            <h3 class="text-2xl font-bold">2023/2024</h3>
-            <p class="text-xl mt-2">Kabinet Transformasi Digital</p>
-        </div>
-    </div>
-</section>
-
-<!-- Foto Galeri Section -->
-<section class="himasif-content-section">
-    <div class="container mx-auto px-4">
-        <h2 class="himasif-section-title">Galeri Kegiatan</h2>
-        <div class="himasif-gallery-grid mt-8">
-            <!-- Gallery items will be dynamically populated -->
-        </div>
-    </div>
-</section>
-
-<!-- Sorotan Section -->
-<section class="himasif-content-section himasif-content-section--light">
-    <div class="container mx-auto px-4">
-        <h2 class="himasif-section-title">Sorotan</h2>
-        <div class="himasif-highlights-grid mt-8">
-            <!-- Highlights items will be dynamically populated -->
-        </div>
-    </div>
-</section>
 @endsection
 
 @push('scripts')
