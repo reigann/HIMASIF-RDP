@@ -49,6 +49,7 @@
     z-index: 0;
     overflow: hidden;
     transition: transform 0.3s ease-out;
+    will-change: transform; /* Hint for browser optimization */
 }
 
 .noise-overlay {
@@ -73,20 +74,10 @@
         background-position: 0 0;
         filter: brightness(1);
     }
-    25% {
-        opacity: 0.08;
-        background-position: 20px 10px;
-        filter: brightness(1.2);
-    }
     50% {
-        opacity: 0.07;
+        opacity: 0.08;
         background-position: 40px 20px;
-        filter: brightness(1);
-    }
-    75% {
-        opacity: 0.09;
-        background-position: 20px 30px;
-        filter: brightness(1.3);
+        filter: brightness(1.2);
     }
 }
 
@@ -111,130 +102,90 @@
     stroke-dashoffset: 1000;
     animation: dash 3s ease-in-out forwards;
     transition: transform 1.2s ease-out; /* Slightly faster transition */
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)) 
-           drop-shadow(0 0 10px rgba(100, 200, 255, 0.3))
-           drop-shadow(0 0 20px rgba(70, 130, 255, 0.2)); /* Enhanced triple glow */
+    /* Simplified filter with fewer drop-shadows */
+    filter: drop-shadow(0 0 8px rgba(100, 200, 255, 0.3));
 }
 
 .line1 { 
     transform: translateY(0) scale(2.0); 
     stroke: rgba(255,255,255,0.18); 
     stroke-width: 3;
-    animation: dash 3s ease-in-out forwards, floatLine1 30s ease-in-out infinite, glowPulse 6s ease-in-out infinite;
+    animation: dash 3s ease-in-out forwards, floatLine1 45s ease-in-out infinite;
 }
 .line2 { 
     transform: translateY(0) scale(2.0); 
     stroke: rgba(255,255,255,0.17); 
     stroke-width: 3;
-    animation: dash 3s ease-in-out forwards, floatLine2 32s ease-in-out infinite, glowPulse 6s ease-in-out infinite 0.7s;
+    animation: dash 3s ease-in-out forwards, floatLine2 48s ease-in-out infinite;
 }
 .line3 { 
     transform: translateY(0) scale(2.0); 
     stroke: rgba(255,255,255,0.16); 
     stroke-width: 3;
-    animation: dash 3s ease-in-out forwards, floatLine3 35s ease-in-out infinite, glowPulse 6s ease-in-out infinite 1.4s;
+    animation: dash 3s ease-in-out forwards, floatLine3 50s ease-in-out infinite;
 }
 .line4 { 
     transform: translateY(0) scale(2.0); 
     stroke: rgba(255,255,255,0.18); 
     stroke-width: 3;
-    animation: dash 3s ease-in-out forwards, floatLine4 33s ease-in-out infinite, glowPulse 6s ease-in-out infinite 2.1s;
+    animation: dash 3s ease-in-out forwards, floatLine4 47s ease-in-out infinite;
 }
 .line5 { 
     transform: translateY(0) scale(2.0); 
     stroke: rgba(255,255,255,0.17); 
     stroke-width: 3;
-    animation: dash 3s ease-in-out forwards, floatLine5 36s ease-in-out infinite, glowPulse 6s ease-in-out infinite 2.8s;
+    animation: dash 3s ease-in-out forwards, floatLine5 52s ease-in-out infinite;
 }
 .line6 { 
     transform: translateY(0) scale(2.0); 
     stroke: rgba(255,255,255,0.16); 
     stroke-width: 3;
-    animation: dash 3s ease-in-out forwards, floatLine6 34s ease-in-out infinite, glowPulse 6s ease-in-out infinite 3.5s;
+    animation: dash 3s ease-in-out forwards, floatLine6 49s ease-in-out infinite;
 }
 .line7 { 
     transform: translateY(0) scale(2.0); 
     stroke: rgba(255,255,255,0.18); 
     stroke-width: 3;
-    animation: dash 3s ease-in-out forwards, floatLine7 38s ease-in-out infinite, glowPulse 6s ease-in-out infinite 4.2s;
+    animation: dash 3s ease-in-out forwards, floatLine7 53s ease-in-out infinite;
 }
 .line8 { 
     transform: translateY(0) scale(2.0); 
     stroke: rgba(255,255,255,0.17); 
     stroke-width: 3;
-    animation: dash 3s ease-in-out forwards, floatLine8 40s ease-in-out infinite, glowPulse 6s ease-in-out infinite 4.9s;
+    animation: dash 3s ease-in-out forwards, floatLine8 55s ease-in-out infinite;
 }
 
 @keyframes floatLine1 {
     0%, 100% { transform: translate(0, 0) rotate(10deg) scale(2.0); }
-    20% { transform: translate(15px, 10px) rotate(11deg) scale(2.02); }
-    40% { transform: translate(5px, 20px) rotate(10deg) scale(2.0); }
-    60% { transform: translate(-10px, 15px) rotate(9deg) scale(1.98); }
-    80% { transform: translate(-15px, 5px) rotate(10deg) scale(2.0); }
+    50% { transform: translate(5px, 10px) rotate(11deg) scale(2.02); }
 }
 @keyframes floatLine2 {
     0%, 100% { transform: translate(0, 0) rotate(20deg) scale(2.0); }
-    20% { transform: translate(-10px, 15px) rotate(19deg) scale(1.98); }
-    40% { transform: translate(-5px, 25px) rotate(20deg) scale(2.0); }
-    60% { transform: translate(8px, 20px) rotate(21deg) scale(2.02); }
-    80% { transform: translate(12px, 5px) rotate(20deg) scale(2.0); }
+    50% { transform: translate(-5px, 15px) rotate(19deg) scale(1.98); }
 }
 @keyframes floatLine3 {
     0%, 100% { transform: translate(0, 0) rotate(30deg) scale(2.0); }
-    20% { transform: translate(12px, -10px) rotate(31deg) scale(2.02); }
-    40% { transform: translate(5px, -18px) rotate(30deg) scale(2.0); }
-    60% { transform: translate(-8px, -15px) rotate(29deg) scale(1.98); }
-    80% { transform: translate(-12px, -5px) rotate(30deg) scale(2.0); }
+    50% { transform: translate(8px, -10px) rotate(31deg) scale(2.02); }
 }
 @keyframes floatLine4 {
     0%, 100% { transform: translate(0, 0) rotate(40deg) scale(2.0); }
-    20% { transform: translate(-15px, -12px) rotate(39deg) scale(1.98); }
-    40% { transform: translate(-5px, -22px) rotate(40deg) scale(2.0); }
-    60% { transform: translate(10px, -18px) rotate(41deg) scale(2.02); }
-    80% { transform: translate(15px, -5px) rotate(40deg) scale(2.0); }
+    50% { transform: translate(-8px, -12px) rotate(39deg) scale(1.98); }
 }
 @keyframes floatLine5 {
     0%, 100% { transform: translate(0, 0) rotate(50deg) scale(2.0); }
-    20% { transform: translate(18px, 8px) rotate(51deg) scale(2.02); }
-    40% { transform: translate(10px, 15px) rotate(50deg) scale(2.0); }
-    60% { transform: translate(-5px, 12px) rotate(49deg) scale(1.98); }
-    80% { transform: translate(-18px, 4px) rotate(50deg) scale(2.0); }
+    50% { transform: translate(10px, 8px) rotate(51deg) scale(2.02); }
 }
 @keyframes floatLine6 {
     0%, 100% { transform: translate(0, 0) rotate(60deg) scale(2.0); }
-    20% { transform: translate(-20px, 10px) rotate(59deg) scale(1.98); }
-    40% { transform: translate(-10px, 18px) rotate(60deg) scale(2.0); }
-    60% { transform: translate(5px, 15px) rotate(61deg) scale(2.02); }
-    80% { transform: translate(20px, 5px) rotate(60deg) scale(2.0); }
+    50% { transform: translate(-10px, 10px) rotate(59deg) scale(1.98); }
 }
 @keyframes floatLine7 {
     0%, 100% { transform: translate(0, 0) rotate(70deg) scale(2.0); }
-    20% { transform: translate(15px, -15px) rotate(71deg) scale(2.02); }
-    40% { transform: translate(8px, -25px) rotate(70deg) scale(2.0); }
-    60% { transform: translate(-5px, -20px) rotate(69deg) scale(1.98); }
-    80% { transform: translate(-15px, -8px) rotate(70deg) scale(2.0); }
+    50% { transform: translate(8px, -15px) rotate(71deg) scale(2.02); }
 }
 @keyframes floatLine8 {
     0%, 100% { transform: translate(0, 0) rotate(80deg) scale(2.0); }
-    20% { transform: translate(-12px, -18px) rotate(79deg) scale(1.98); }
-    40% { transform: translate(-6px, -30px) rotate(80deg) scale(2.0); }
-    60% { transform: translate(8px, -25px) rotate(81deg) scale(2.02); }
-    80% { transform: translate(12px, -10px) rotate(80deg) scale(2.0); }
-}
-
-@keyframes glowPulse {
-    0%, 100% {
-        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)) 
-               drop-shadow(0 0 10px rgba(100, 200, 255, 0.3))
-               drop-shadow(0 0 20px rgba(70, 130, 255, 0.2));
-        stroke-width: 3px;
-    }
-    50% {
-        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7)) 
-               drop-shadow(0 0 15px rgba(100, 200, 255, 0.5))
-               drop-shadow(0 0 25px rgba(70, 130, 255, 0.4));
-        stroke-width: 3.5px;
-    }
+    50% { transform: translate(-6px, -18px) rotate(79deg) scale(1.98); }
 }
 
 @keyframes dash {
@@ -264,6 +215,7 @@
     color: white;
     position: relative;
     z-index: 1;
+    user-select: none;
 }
 
 #landing .subtitle {
@@ -276,6 +228,7 @@
     width: 100%;
     position: relative;
     z-index: 1;
+    user-select: none;
 }
 
 #landing .subtitle > span {
@@ -770,6 +723,7 @@
 #pengurus {
     background-color: var(--blue-dark);
     padding-top: 5rem;
+    color: var(--blue-light);
 }
 
 #pengurus .section-content {
@@ -831,33 +785,155 @@
 
 /* Sorotan Section */
 #sorotan {
-    background-color: var(--white);
+    min-height: 100vh;
+    padding: 6rem 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.sorotan-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/backgrounds/bg hijau1.svg');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+.sorotan-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    height: 100%;
+}
+
+.sorotan-text-content {
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.sorotan-title {
+    font-family: 'GTBlack', sans-serif;
+    font-size: 5rem;
+    color: white;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    line-height: 1;
+    user-select: none;
+}
+
+.sorotan-yang {
+    font-family: 'Saol', serif;
+    font-style: italic;
+    font-size: 4rem;
+    font-weight: normal;
+    text-transform: none;
+    color: white;
+    display: inline-block;
+    margin-left: 1rem;
+}
+
+.sorotan-subtitle {
+    font-family: 'GTBlack', sans-serif;
+    font-size: 5rem;
+    color: white;
+    margin: 0;
+    line-height: 1.1;
+    text-transform: uppercase;
+    user-select: none;
 }
 
 .sorotan-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    padding: 2rem 0;
 }
 
-.sorotan-item {
-    padding: 2rem;
-    border-left: 3px solid var(--blue-primary);
+.sorotan-glass-box {
+    width: 100%;
+    height: 250px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    background-color: var(--white);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
 }
 
-.sorotan-item:hover {
-    background-color: var(--cyan-light);
-    transform: scale(1.02);
+.sorotan-glass-box.large-box {
+    height: 300px;
 }
 
-.sorotan-item h4 {
-    font-family: 'GTMedium', sans-serif;
-    color: var(--blue-primary);
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+.sorotan-glass-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Responsive adjustments for Sorotan section */
+@media (max-width: 1200px) {
+    .sorotan-title, .sorotan-subtitle {
+        font-size: 4rem;
+    }
+    
+    .sorotan-yang {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .sorotan-title, .sorotan-subtitle {
+        font-size: 3.5rem;
+    }
+    
+    .sorotan-yang {
+        font-size: 3rem;
+    }
+    
+    .sorotan-glass-box.large-box {
+        height: 250px;
+    }
+}
+
+@media (max-width: 767px) {
+    .sorotan-title, .sorotan-subtitle {
+        font-size: 3rem;
+        text-align: center;
+    }
+    
+    .sorotan-yang {
+        font-size: 2.5rem;
+    }
+    
+    .sorotan-text-content {
+        margin-bottom: 2rem;
+        align-items: center;
+    }
+    
+    .sorotan-glass-box {
+        height: 200px;
+    }
+    
+    .sorotan-glass-box.large-box {
+        height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .sorotan-title, .sorotan-subtitle {
+        font-size: 2.5rem;
+    }
+    
+    .sorotan-yang {
+        font-size: 2rem;
+        margin-left: 0.5rem;
+    }
 }
 
 /* Responsive Adjustments */

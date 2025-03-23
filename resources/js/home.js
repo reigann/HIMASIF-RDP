@@ -1,5 +1,43 @@
 // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Generate SVG curved lines dynamically
+    const curvedLinesContainer = document.querySelector('.curved-lines');
+    
+    if (curvedLinesContainer) {
+        // Define the same paths that were in the HTML
+        const curvePaths = [
+            { y: 500, controlY: 350, class: 'line1' },
+            { y: 400, controlY: 250, class: 'line2' },
+            { y: 600, controlY: 450, class: 'line3' },
+            { y: 300, controlY: 150, class: 'line4' },
+            { y: 700, controlY: 550, class: 'line5' },
+            { y: 200, controlY: 50, class: 'line6' },
+            { y: 800, controlY: 650, class: 'line7' },
+            { y: 100, controlY: -50, class: 'line8' }
+        ];
+        
+        // Create SVG elements dynamically
+        curvePaths.forEach(curve => {
+            // Create SVG element
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('class', `curved-line ${curve.class}`);
+            svg.setAttribute('viewBox', '0 0 1000 1000');
+            svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+            
+            // Create path element
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', `M0,${curve.y} Q250,${curve.controlY} 500,${curve.y} T1000,${curve.y}`);
+            path.setAttribute('fill', 'none');
+            path.setAttribute('stroke-width', '2');
+            
+            // Append path to SVG
+            svg.appendChild(path);
+            
+            // Append SVG to container
+            curvedLinesContainer.appendChild(svg);
+        });
+    }
+    
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -88,6 +126,50 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(pengurusSection);
     }
     
+    // Pengurus section stat numbers counter animation
+    if (pengurusSection) {
+        const statNumbers = pengurusSection.querySelectorAll('.stat-number');
+        let animated = false;
+        
+        // Create an intersection observer to detect when the pengurus section is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !animated) {
+                    // Start counter animation for each stat number
+                    statNumbers.forEach(statNumber => {
+                        const target = parseInt(statNumber.getAttribute('data-target'));
+                        let count = 0;
+                        const duration = 2000; // Animation duration in milliseconds
+                        const frameDuration = 1000 / 60; // 60fps
+                        const totalFrames = Math.ceil(duration / frameDuration);
+                        const increment = target / totalFrames;
+                        
+                        // Use requestAnimationFrame for smooth animation
+                        const animate = () => {
+                            count += increment;
+                            if (count < target) {
+                                statNumber.innerText = Math.floor(count);
+                                requestAnimationFrame(animate);
+                            } else {
+                                statNumber.innerText = target;
+                            }
+                        };
+                        
+                        animate();
+                    });
+                    
+                    animated = true;
+                    // Unobserve after animation is triggered
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.3 // Trigger when 30% of the section is visible
+        });
+        
+        observer.observe(pengurusSection);
+    }
+    
     // Interactive Background with Mouse Movement and Scroll Rotation
     const backgroundContainer = document.querySelector('.background-container');
     const curvedLines = document.querySelector('.curved-lines');
@@ -96,85 +178,95 @@ document.addEventListener('DOMContentLoaded', function() {
         // Set initial transform to prevent issues with combining transforms later
         curvedLines.style.transform = 'translate(0px, 0px) rotate(0deg)';
         
-        // Variables for very slow autonomous movement
+        // Use requestAnimationFrame for better performance
+        let ticking = false;
+        let lastScrollY = window.scrollY;
+        let scrollRotation = 0;
         let moveX = 0;
         let moveY = 0;
+        
+        // Optimize by using a single RAF loop for all animations
+        function updateBackgroundEffects() {
+            // Apply all transforms at once
+            curvedLines.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${scrollRotation}deg)`;
+            ticking = false;
+        }
+        
+        // Throttled mouse movement handler - more efficient
+        document.addEventListener('mousemove', function(e) {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    // Calculate movement with reduced calculations
+                    moveX = (e.clientX / window.innerWidth - 0.5) * 20; // -10px to +10px
+                    moveY = (e.clientY / window.innerHeight - 0.5) * 20; // -10px to +10px
+                    updateBackgroundEffects();
+                });
+                ticking = true;
+            }
+        }, { passive: true }); // Add passive flag for better performance
+        
+        // Throttled scroll handler - more efficient
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    // Calculate rotation based on scroll position
+                    const scrollPosition = window.scrollY;
+                    const scrollDelta = scrollPosition - lastScrollY;
+                    lastScrollY = scrollPosition;
+                    
+                    // Accumulate rotation based on scroll direction and speed, but much slower
+                    scrollRotation += scrollDelta * 0.02; // Reduced from 0.05 to 0.02
+                    
+                    // Parallax effect on scroll - make this much more subtle
+                    backgroundContainer.style.transform = `translateY(${scrollPosition * 0.03}px)`; // Reduced from 0.05 to 0.03
+                    
+                    updateBackgroundEffects();
+                });
+                ticking = true;
+            }
+        }, { passive: true }); // Add passive flag for better performance
+        
+        // Simplified autonomous movement with reduced calculations
+        let lastTime = 0;
         let targetX = 0;
         let targetY = 0;
+        let animationFrameId = null;
         
-        // Function for very slow autonomous floating movement
-        function autonomousMovement() {
-            // Very slowly change target positions (only change a tiny bit each frame)
-            if (Math.random() < 0.005) {
-                // Only occasionally set a new target (roughly every 200 frames or ~3 seconds)
-                targetX = (Math.random() - 0.5) * 10; // Small range of -5px to 5px
-                targetY = (Math.random() - 0.5) * 10;
+        function autonomousMovement(timestamp) {
+            // Only update every 200ms instead of every 100ms
+            if (timestamp - lastTime > 200) {
+                lastTime = timestamp;
+                
+                // Only occasionally set a new target (less frequently)
+                if (Math.random() < 0.005) { // Reduced from 0.01 to 0.005
+                    targetX = (Math.random() - 0.5) * 8; // Reduced from 10 to 8
+                    targetY = (Math.random() - 0.5) * 8; // Reduced from 10 to 8
+                }
+                
+                // Only apply autonomous movement if there's no user interaction
+                if (Math.abs(moveX) < 1 && Math.abs(moveY) < 1) {
+                    moveX += (targetX - moveX) * 0.005; // Reduced from 0.01 to 0.005
+                    moveY += (targetY - moveY) * 0.005; // Reduced from 0.01 to 0.005
+                    
+                    if (!ticking) {
+                        requestAnimationFrame(updateBackgroundEffects);
+                        ticking = true;
+                    }
+                }
             }
             
-            // Very slowly move current position toward target (0.5% per frame)
-            moveX += (targetX - moveX) * 0.005;
-            moveY += (targetY - moveY) * 0.005;
-            
-            // Get current transform values
-            const currentTransform = curvedLines.style.transform;
-            const translateMatch = currentTransform.match(/translate\(([-\d.]+)px, ([-\d.]+)px\)/);
-            const rotationMatch = currentTransform.match(/rotate\(([-\d.]+)deg\)/);
-            
-            // If there's user-controlled translation, we don't want to override it
-            // Only apply autonomous movement if there's no user interaction
-            if (!translateMatch || (Math.abs(parseFloat(translateMatch[1])) < 1 && Math.abs(parseFloat(translateMatch[2])) < 1)) {
-                const currentRotation = rotationMatch ? parseFloat(rotationMatch[1]) : 0;
-                curvedLines.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${currentRotation}deg)`;
-            }
-            
-            requestAnimationFrame(autonomousMovement);
+            // Use requestAnimationFrame with a throttled callback
+            animationFrameId = requestAnimationFrame(autonomousMovement);
         }
         
         // Start autonomous movement
-        autonomousMovement();
+        animationFrameId = requestAnimationFrame(autonomousMovement);
         
-        // Mouse movement parallax effect - make this more subtle
-        document.addEventListener('mousemove', function(e) {
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
-            
-            // Calculate movement amount (smaller value for more subtle effect)
-            const moveX = (mouseX - 0.5) * 20; // -10px to +10px
-            const moveY = (mouseY - 0.5) * 20; // -10px to +10px
-            
-            // Get current rotation if any
-            const currentTransform = curvedLines.style.transform;
-            const rotationMatch = currentTransform.match(/rotate\(([-\d.]+)deg\)/);
-            const currentRotation = rotationMatch ? parseFloat(rotationMatch[1]) : 0;
-            
-            // Apply transform to curved lines with smooth transition
-            curvedLines.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${currentRotation}deg)`;
-        });
-        
-        // Scroll rotation effect - make this much slower
-        let lastScrollY = window.scrollY;
-        let scrollRotation = 0;
-        
-        window.addEventListener('scroll', function() {
-            // Calculate rotation based on scroll position
-            const scrollPosition = window.scrollY;
-            const scrollDelta = scrollPosition - lastScrollY;
-            lastScrollY = scrollPosition;
-            
-            // Accumulate rotation based on scroll direction and speed, but much slower
-            scrollRotation += scrollDelta * 0.05; // Reduced from 0.1 to 0.05 for slower rotation
-            
-            // Get current transform values
-            const currentTransform = curvedLines.style.transform;
-            const translateMatch = currentTransform.match(/translate\(([-\d.]+)px, ([-\d.]+)px\)/);
-            const translateX = translateMatch ? parseFloat(translateMatch[1]) : 0;
-            const translateY = translateMatch ? parseFloat(translateMatch[2]) : 0;
-            
-            // Apply rotation to curved lines container while preserving translation
-            curvedLines.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${scrollRotation}deg)`;
-            
-            // Parallax effect on scroll - make this much more subtle
-            backgroundContainer.style.transform = `translateY(${scrollPosition * 0.05}px)`; // Reduced from 0.1 to 0.05
+        // Clean up animation frame on page unload to prevent memory leaks
+        window.addEventListener('beforeunload', () => {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
         });
     }
     
@@ -311,4 +403,61 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize all animations
     animatePeriodeDivider();
+    
+    // Sorotan section glass box effects
+    const sorotanSection = document.getElementById('sorotan');
+    const glassBoxes = document.querySelectorAll('.sorotan-glass-box');
+    
+    if (sorotanSection && glassBoxes.length > 0) {
+        // Add parallax effect to glass boxes on mouse move
+        sorotanSection.addEventListener('mousemove', function(e) {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            glassBoxes.forEach((box, index) => {
+                // Different movement intensity for each box
+                const offsetX = (mouseX - 0.5) * (10 + index * 5);
+                const offsetY = (mouseY - 0.5) * (10 + index * 5);
+                
+                // Apply subtle transform with hardware acceleration
+                box.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0) scale(1.0${index * 0.01})`;
+            });
+        }, { passive: true });
+        
+        // Reset position when mouse leaves the section
+        sorotanSection.addEventListener('mouseleave', function() {
+            glassBoxes.forEach(box => {
+                box.style.transform = 'translate3d(0, 0, 0)';
+            });
+        }, { passive: true });
+        
+        // Animate boxes on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Animate each box with a delay
+                    glassBoxes.forEach((box, index) => {
+                        setTimeout(() => {
+                            box.style.opacity = '1';
+                            box.style.transform = 'translateY(0)';
+                        }, 200 * index);
+                    });
+                    
+                    // Unobserve after animation is triggered
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+        
+        observer.observe(sorotanSection);
+        
+        // Initialize glass boxes with starting styles
+        glassBoxes.forEach(box => {
+            box.style.opacity = '0';
+            box.style.transform = 'translateY(30px)';
+            box.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+        });
+    }
 });
