@@ -2,40 +2,40 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
             
             const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
             
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 70, // Offset for fixed navbar if you have one
-                    behavior: 'smooth'
-                });
+            if (targetId !== '#') {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
             }
         });
     });
     
-    // Add animation class to elements when they come into view
-    const animateOnScroll = function() {
-        const elements = document.querySelectorAll('.animate-on-scroll');
+    // Remove animate-on-scroll functionality
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    elements.forEach(element => {
+        element.classList.remove('animate-on-scroll');
+        element.classList.add('animated');
+    });
+    
+    // Foto grid animation
+    const fotoGrid = document.querySelector('.foto-grid');
+    if (fotoGrid) {
+        const fotoItems = fotoGrid.querySelectorAll('.foto-item');
         
-        elements.forEach(element => {
-            const elementPosition = element.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (elementPosition < windowHeight - 100) {
-                element.classList.add('animated');
-            }
+        // Show all items immediately instead of on scroll
+        fotoItems.forEach((item, index) => {
+            item.classList.add('animated');
         });
-    };
-    
-    // Run animation check on scroll
-    window.addEventListener('scroll', animateOnScroll);
-    
-    // Run once on page load
-    animateOnScroll();
+    }
     
     // Counter animation for Total Pengurus section
     const counterAnimation = () => {
@@ -270,4 +270,45 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    // Animate the periode divider when scrolling to the section
+    function animatePeriodeDivider() {
+        const periodeDivider = document.querySelector('.periode-divider-container');
+        if (!periodeDivider) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    periodeDivider.classList.add('animate');
+                    periodeDivider.classList.remove('exit');
+                } else {
+                    // When scrolling away from the section
+                    if (periodeDivider.classList.contains('animate')) {
+                        periodeDivider.classList.remove('animate');
+                        periodeDivider.classList.add('exit');
+                    }
+                }
+            });
+        }, { threshold: 0.2, rootMargin: '0px 0px -20% 0px' });
+
+        observer.observe(document.querySelector('#periode'));
+        
+        // Also observe the next section to ensure exit animation works
+        const pengurusSection = document.querySelector('#pengurus');
+        if (pengurusSection) {
+            const exitObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        periodeDivider.classList.remove('animate');
+                        periodeDivider.classList.add('exit');
+                    }
+                });
+            }, { threshold: 0.2, rootMargin: '-20% 0px 0px 0px' });
+            
+            exitObserver.observe(pengurusSection);
+        }
+    }
+
+    // Initialize all animations
+    animatePeriodeDivider();
 });

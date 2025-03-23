@@ -17,6 +17,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    opacity: 1;
 }
 
 .section-header {
@@ -24,30 +25,6 @@
     margin-bottom: 3rem;
 }
 
-.section-header h2 {
-    font-family: 'GTMedium', sans-serif;
-    color: var(--blue-dark);
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    position: relative;
-    padding-bottom: 15px;
-}
-
-.section-header h2:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background-color: var(--blue-primary);
-}
-
-.section-header p {
-    font-size: 1.2rem;
-    color: var(--blue-dark);
-}
 
 /* Landing Section */
 #landing {
@@ -411,14 +388,21 @@
 }
 
 /* Active section animation */
-.active-section {
-    animation: section-fade-in 0.8s forwards;
+.animate-on-scroll {
+    opacity: 1;
+    transform: translateY(0);
+    transition: none;
+}
+
+.animated {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 @keyframes section-fade-in {
     from {
-        opacity: 0.7;
-        transform: translateY(20px);
+        opacity: 1;
+        transform: translateY(0);
     }
     to {
         opacity: 1;
@@ -426,91 +410,423 @@
     }
 }
 
-/* Foto Section */
-#foto {
-    background-color: var(--blue-light);
+/* Galeri Section */
+#galeri {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    min-height: 700px;
+    background-color: var(--blue-dark);
 }
 
-.foto-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+.galeri-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/pages/home/fotbar-bg.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
 }
 
-.foto-item {
-    background-color: var(--white);
-    padding: 2rem;
+.galeri-content {
+    position: relative;
+    z-index: 3;
+    padding: 4rem 0;
+    min-height: 700px;
+}
+
+.galeri-row {
+    position: relative;
+    height: 100%;
+}
+
+.galeri-text-col {
+    position: absolute;
+    z-index: 60;
+    top: 26rem;
+    left: 0;
+    width: 50%;
+}
+
+.galeri-text-content {
+    padding-left: 15rem;
+}
+
+.galeri-title {
+    font-family: 'GTBlack', sans-serif;
+    font-size: 4.5rem;
+    color: white;
+    line-height: 0.8;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: -3px;
+    margin-bottom: -1rem;
+}
+
+.galeri-subtitle {
+    font-family: 'GTBlack', sans-serif;
+    font-size: 4.5rem;
+    color: white;
+    line-height: 0.8;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: -3px;
+}
+
+.galeri-ampersand {
+    font-family: 'Saol', serif;
+    font-style: italic;
+    letter-spacing: 0;
+    margin-right: 25px;
+}
+
+.galeri-link {
+    position: absolute;
+    bottom: 80px;
+    right: 120px;
+    z-index: 60;
+}
+
+.galeri-kami {
+    font-family: 'GTMedium', sans-serif;
+    font-size: 1.2rem;
+    color: white;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    text-shadow: 0 0 10px rgba(0, 149, 255, 0.7);
+}
+
+.galeri-arrow {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.galeri-kami:hover .galeri-arrow {
+    transform: translateX(5px);
+}
+
+.galeri-image-col {
+    position: absolute;
+    top: 50px;
+    right: 100px;
+    width: 60%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.galeri-image-wrapper {
+    width: 100%;
+    max-width: 650px;
+    position: relative;
+    z-index: 50;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    text-align: center;
+    overflow: hidden;
 }
 
-.foto-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+.galeri-image-wrapper {
+    transition: transform 0.3s ease, box-shadow 0.5s ease, filter 0.5s ease;
+}
+
+.galeri-image {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 5px 50px #0004ff1c;
+    border-radius: 10px;
+    display: block;
+    max-width: 100%;
+    object-fit: contain;
+    z-index: 50;
+}
+
+/* Media Queries for Galeri Section */
+@media (max-width: 991px) {
+    .galeri-text-col {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        padding: 2rem;
+    }
+    
+    .galeri-image-col {
+        position: relative;
+        top: 0;
+        right: 0;
+        width: 100%;
+        padding: 2rem;
+        justify-content: center;
+    }
+    
+    .galeri-text-content {
+        padding-left: 0;
+    }
+    
+    .galeri-link {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+    
+    .galeri-title, .galeri-subtitle {
+        font-size: 3.5rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .galeri-title, .galeri-subtitle {
+        font-size: 6rem;
+        letter-spacing: -5px;
+    }
 }
 
 /* Periode HIMASIF Section */
 #periode {
-    background-color: var(--white);
+    background-color: var(--blue-dark);
+    color: white;
+    padding: 8rem 0 15rem;
+    position: relative;
+    overflow: hidden;
 }
 
-.periode-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+#periode .section-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.visi-box, .misi-box {
-    padding: 2rem;
-    border-radius: 10px;
-    background-color: var(--cyan-light);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+.periode-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    width: 100%;
 }
 
-.visi-box h3, .misi-box h3 {
-    font-family: 'GTMedium', sans-serif;
-    color: var(--blue-primary);
-    font-size: 2rem;
+.periode-left {
+    width: 50%;
+    padding-left: 3rem;
+}
+
+.periode-right {
+    width: 40%;
+    padding-top: 2rem;
+}
+
+.periode-himasif {
+    font-family: 'GTBlack', sans-serif;
+    font-size: 9rem;
+    line-height: 0.9;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: -3px;
+    color: var(--blue-light);
+}
+
+.periode-year-wrapper {
+    display: flex;
+    align-items: baseline;
+    margin-top: -1rem;
+}
+
+.periode-text {
+    font-family: 'Saol', serif;
+    font-style: italic;
+    font-size: 4rem;
+    margin-right: 1rem;
+    color: var(--blue-light);
+}
+
+.periode-year {
+    font-family: 'GTBlack', sans-serif;
+    font-size: 9rem;
+    line-height: 1;
+    color: var(--blue-light);
+}
+
+.periode-right p {
+    font-family: 'GTLight', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
     margin-bottom: 1.5rem;
 }
 
-.visi-box p, .misi-box p {
-    font-size: 1.1rem;
-    line-height: 1.6;
+.selengkapnya {
+    font-family: 'GTMedium', sans-serif;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    width: fit-content;
+    border-bottom: 1px solid white;
+    padding-bottom: 0.25rem;
+}
+
+.periode-divider-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1000px;
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    z-index: 10;
+}
+
+.periode-divider-container.animate {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.periode-divider-container.exit {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+}
+
+.periode-divider-line {
+    height: 1px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+    flex-grow: 1;
+    max-width: 40%;
+    transition: width 0.8s ease;
+}
+
+.periode-divider-diamond {
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    transform: rotate(45deg) scale(0);
+    margin: 0 1rem;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    transition: transform 0.8s ease;
+}
+
+.periode-divider-container.animate .periode-divider-diamond {
+    transform: rotate(45deg) scale(1);
+    animation: diamondPulse 3s infinite ease-in-out;
+}
+
+@keyframes diamondPulse {
+    0% {
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        transform: rotate(45deg) scale(1);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(255, 255, 255, 1);
+        transform: rotate(45deg) scale(1.2);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        transform: rotate(45deg) scale(1);
+    }
+}
+
+@media (max-width: 991px) {
+    .periode-container {
+        flex-direction: column;
+    }
+    
+    .periode-left, .periode-right {
+        width: 100%;
+        padding-left: 0;
+    }
+    
+    .periode-left {
+        margin-bottom: 2rem;
+    }
+    
+    .periode-himasif {
+        font-size: 6rem;
+    }
+    
+    .periode-text {
+        font-size: 3rem;
+    }
+    
+    .periode-year {
+        font-size: 6rem;
+    }
 }
 
 /* Total Pengurus Section */
 #pengurus {
-    background-color: var(--blue-light);
+    background-color: var(--blue-dark);
+    padding-top: 5rem;
 }
 
-.pengurus-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+#pengurus .section-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
-.pengurus-item {
-    background-color: var(--white);
-    border-radius: 10px;
-    padding: 2rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    text-align: center;
+.total-text {
+    font-family: 'Saol', serif;
+    font-size: 3rem;
+    text-transform: lowercase;
+    font-style: italic;
+    margin-bottom: 0.5rem;
 }
 
-.pengurus-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+.pengurus-title {
+    font-family: 'GTBlack', sans-serif;
+    font-size: 7rem;
+    margin: 0 0 3rem;
+    text-transform: uppercase;
 }
 
-.pengurus-item h4 {
-    font-family: 'GTMedium', sans-serif;
-    color: var(--blue-primary);
+.stats-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.stat-number {
+    font-family: 'GTBlack', sans-serif;
+    font-size: 5rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-family: 'Saol', serif;
     font-size: 1.5rem;
-    margin-bottom: 1rem;
+    color: var(--white);
+}
+
+.stat-divider {
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 1rem;
 }
 
 /* Sorotan Section */

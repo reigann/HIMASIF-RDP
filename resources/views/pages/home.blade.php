@@ -67,7 +67,7 @@
     <section id="foto" class="py-5 bg-light">
         <div class="section-content">
             <div class="section-header">
-                <h2>Galeri Foto</h2>
+                <h2>Foto</h2>
                 <p>Dokumentasi kegiatan HIMASIF RDP</p>
             </div>
             <div class="foto-grid">
@@ -87,63 +87,74 @@
         </div>
     </section>
 
-    <!-- Periode HIMASIF Section -->
-    <section id="periode" class="py-5">
+    <!-- Periode Section -->
+    <section id="periode">
         <div class="section-content">
-            <div class="section-header">
-                <h2>Periode HIMASIF</h2>
-                <p>Kepengurusan HIMASIF RDP 2023/2024</p>
+            <div class="periode-container">
+                <div class="periode-left">
+                    <h2 class="periode-himasif">HIMASIF</h2>
+                    <div class="periode-year-wrapper">
+                        <span class="periode-text">periode</span>
+                        <span class="periode-year">2025</span>
+                    </div>
+                </div>
+                <div class="periode-right">
+                    <p>HIMASIF adalah organisasi mahasiswa yang mewadahi aspirasi, pengembangan keilmuan, dan kreativitas mahasiswa Sistem Informasi dalam bidang teknologi, manajemen, dan komunikasi akademik.</p>
+                    <a href="#" class="selengkapnya">selengkapnya →</a>
+                </div>
             </div>
-            <div class="periode-content">
-                <div class="visi-box">
-                    <h3>Visi</h3>
-                    <p>Menjadikan HIMASIF sebagai wadah yang aktif, inovatif, dan bermanfaat bagi mahasiswa Sistem Informasi</p>
-                </div>
-                <div class="misi-box">
-                    <h3>Misi</h3>
-                    <p>Mengembangkan potensi mahasiswa Sistem Informasi dalam bidang akademik dan non-akademik</p>
-                    <p>Membangun hubungan yang baik antar mahasiswa Sistem Informasi</p>
-                    <p>Menjadi jembatan antara mahasiswa dengan pihak program studi</p>
-                </div>
+            <div class="periode-divider-container">
+                <div class="periode-divider-line"></div>
+                <div class="periode-divider-diamond"></div>
+                <div class="periode-divider-line"></div>
             </div>
         </div>
     </section>
 
     <!-- Total Pengurus Section -->
-    <section id="pengurus" class="py-5 bg-light">
+    <section id="pengurus">
         <div class="section-content">
-            <div class="section-header">
-                <h2>Total Pengurus</h2>
-                <p>Struktur Organisasi HIMASIF RDP</p>
+            <div class="total-text">total</div>
+            <h2 class="pengurus-title">PENGURUS</h2>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">25</div>
+                    <div class="stat-label">anggota</div>
+                </div>
+                <div class="stat-divider">|</div>
+                <div class="stat-item">
+                    <div class="stat-number">9</div>
+                    <div class="stat-label">divisi</div>
+                </div>
+                <div class="stat-divider">|</div>
+                <div class="stat-item">
+                    <div class="stat-number">17</div>
+                    <div class="stat-label">proker</div>
+                </div>
             </div>
-            <div class="pengurus-grid">
-                <div class="pengurus-item">
-                    <h4>Ketua</h4>
-                    <p>1 Orang</p>
-                </div>
-                <div class="pengurus-item">
-                    <h4>Wakil Ketua</h4>
-                    <p>1 Orang</p>
-                </div>
-                <div class="pengurus-item">
-                    <h4>Sekretaris</h4>
-                    <p>2 Orang</p>
-                </div>
-                <div class="pengurus-item">
-                    <h4>Bendahara</h4>
-                    <p>2 Orang</p>
-                </div>
-                <div class="pengurus-item">
-                    <h4>Divisi Akademik</h4>
-                    <p>5 Orang</p>
-                </div>
-                <div class="pengurus-item">
-                    <h4>Divisi Humas</h4>
-                    <p>5 Orang</p>
-                </div>
-                <div class="pengurus-item">
-                    <h4>Divisi Acara</h4>
-                    <p>5 Orang</p>
+        </div>
+    </section>
+
+    <!-- Galeri Section -->
+    <section id="galeri" class="position-relative">
+        <div class="galeri-bg"></div>
+        <div class="container-fluid">
+            <div class="galeri-content">
+                <div class="galeri-row">
+                    <div class="galeri-text-col">
+                        <div class="galeri-text-content">
+                            <h2 class="galeri-title">PROFESSIONAL</h2>
+                            <h2 class="galeri-subtitle"><span class="galeri-ampersand">&amp;</span>KEKELUARGAAN</h2>
+                        </div>
+                    </div>
+                    <div class="galeri-image-col">
+                        <div class="galeri-image-wrapper">
+                            <img src="/images/pages/home/fotbar.jpg" alt="Foto Bersama HIMASIF" class="galeri-image">
+                        </div>
+                    </div>
+                    <div class="galeri-link">
+                        <a href="#" class="galeri-kami">galeri kami <span class="galeri-arrow">→</span></a>
+                    </div>
                 </div>
             </div>
         </div>
