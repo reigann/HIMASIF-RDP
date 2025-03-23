@@ -1,0 +1,203 @@
+@import '../globals.css';  /* Fixed import path */
+
+.navbar {
+    font-family: 'GTMedium', sans-serif;
+    height: 50px;  /* Increased height */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;  /* Changed from 8rem to 20px */
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    position: fixed;
+    width: 100%;
+    left: 0;  /* Added to ensure full width */
+    right: 0;  /* Added to ensure full width */
+    top: 0;
+    z-index: 50;
+    background-color: transparent;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+}
+
+.navbar.scrolled {
+    background-color: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Make container styles specific to navbar */
+.navbar .container-fluid {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-nav {
+    gap: 25px !important;
+}
+
+.navbar .nav-link, 
+.navbar .navbar-section a,
+.navbar .dropdown span {
+    font-family: 'GTMedium', sans-serif;  /* Updated font */
+    font-size: 1rem;  /* Adjusted font size */
+    color: var(--blue-light);
+    text-decoration: none;
+    white-space: nowrap;  /* Prevent text wrapping */
+    transition: color 0.2s;
+}
+
+.navbar .nav-link:hover, 
+.navbar .navbar-section a:hover,
+.navbar .dropdown span:hover {
+    color: var(--white);
+}
+
+/* Ensure dropdown styles only apply within navbar */
+.navbar .dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.navbar .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    min-width: 160px;
+    border-radius: 4px;
+    padding: 0.5rem 0;
+    border: none;
+}
+
+.navbar .dropdown:hover .dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.navbar .dropdown-menu a {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    display: block;
+    color: var(--blue-light);
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.navbar .dropdown-menu a:hover {
+    background-color: #f5f5f5;
+    color: var(--blue-dark);
+}
+
+.navbar .dropdown-item {
+    padding: 0.5rem 1rem;
+    color: var(--blue-light);
+    font-size: 0.875rem;
+}
+
+.navbar .dropdown-item:hover {
+    background-color: rgba(195, 227, 253, 0.1);
+    color: var(--white);
+    border-radius: 4px;
+}
+
+/* Logo adjustments */
+.navbar-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.navbar-logo img {
+    height: 45px;  /* Adjusted logo size */
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.navbar-logo img:hover {
+    transform: scale(1.05);
+}
+
+/* Remove absolute positioning for brand */
+.navbar-brand {
+    position: static;
+    transform: none;
+}
+
+/* Ensure dropdowns don't go off-screen */
+.navbar .dropdown:last-child .dropdown-menu {
+    left: auto;
+    right: 0;
+    transform: none;
+}
+
+/* Make navbar sections more specific */
+.navbar .navbar-section {
+    display: flex;
+    align-items: center;
+    gap: 4rem;  /* Increased from 2.5rem */
+    padding: 0;
+}
+
+.navbar .navbar-section a {
+    text-decoration: none;
+    color: var(--blue-light);
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.navbar .navbar-section a:hover {
+    color: var(--white);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1440px) {
+    .navbar {
+        padding: 0 20px;  /* Keep consistent padding */
+    }
+    
+    .navbar .navbar-section {
+        gap: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .navbar {
+        padding: 0 20px;  /* Keep consistent padding */
+    }
+    
+    .navbar .navbar-section {
+        gap: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        padding: 0 20px;  /* Keep consistent padding */
+        height: 50px;
+    }
+    
+    .navbar .navbar-section {
+        gap: 1rem;
+    }
+    
+    .navbar-logo img {
+        height: 35px;
+    }
+    
+    .navbar .navbar-section a,
+    .navbar .dropdown span {
+        font-size: 0.9rem;
+    }
+}

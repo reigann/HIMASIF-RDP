@@ -1,0 +1,10 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container mx-auto px-4 py-8 mt-16">
+    <h1 class="text-3xl font-bold mb-6">Struktur Organisasi</h1>
+    <div class="prose max-w-none">
+        <!-- Isi konten struktur organisasi -->
+    </div>
+</div>
+@endsection

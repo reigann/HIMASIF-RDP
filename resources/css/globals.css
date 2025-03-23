@@ -1,0 +1,58 @@
+:root {
+    --white: #fff;
+    --blue-light: #C3E3FD;
+    --blue-primary: #2873FF;
+    --cyan-light: #D3FDFF;
+    --blue-dark: #023047;
+    --teal-dark: #004346;
+    
+    /* Color Aliases */
+    --primary: var(--blue-primary);
+    --secondary: var(--blue-dark);
+    --accent: var(--cyan-light);
+    --background: var(--white);
+    --highlight: var(--blue-light);
+    --dark: var(--teal-dark);
+}
+
+@font-face {
+    font-family: 'GTMedium';
+    src: url('/fonts/GT-Walsheim-Condensed-Medium-Trial-BF651b7fc70de01.otf') format('opentype');
+    
+}
+
+@font-face {
+    font-family: 'GLDDisplay';
+    src: url('/fonts/GLDDisplay-Black.ttf') format('truetype');
+   
+}
+
+@font-face {
+    font-family: 'GTBlack';
+    src: url('/fonts/GT-Walsheim-Condensed-Black-Trial-BF651b7fc6a5bf5.otf') format('opentype');
+    
+}
+
+@font-face {
+    font-family: 'Saol';
+    src: url('/fonts/SaolDisplay-LightItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'GTLight';
+    src: url('/fonts/GT-Walsheim-Light-Trial-BF651b7fc714941.otf') format('opentype');
+}
+
+/* Color Utilities */
+.text-primary { color: var(--primary); }
+.text-secondary { color: var(--secondary); }
+.text-accent { color: var(--accent); }
+.text-dark { color: var(--dark); }
+.text-white { color: var(--white); }
+
+.bg-primary { background-color: var(--primary); }
+.bg-secondary { background-color: var(--secondary); }
+.bg-accent { background-color: var(--accent); }
+.bg-highlight { background-color: var(--highlight); }
+.bg-dark { background-color: var(--dark); }
+.bg-white { background-color: var(--white); }
