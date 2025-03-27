@@ -1,0 +1,172 @@
+@import '../globals.css'; 
+
+.footer-container {
+    display: flex;
+    height: 100vh;
+    background-color: var(--blue-dark);
+    color: white;
+    padding: 2% 3%; /* Menambah padding horizontal agar lebih renggang */
+    position: relative; /* Menjadikan container sebagai referensi posisi */
+    overflow: hidden;
+}
+
+.footer-divider {
+    position: absolute;
+    top: 20%; /* Moved higher to align with top of text */
+    height: 75%; /* Increased height to maintain bottom position */
+    left: 60%; /* Center the line between the sections */
+    width: 1px;
+    background-color: var(--blue-primary); /* Thin vertical line color */
+    transform: translateX(-50%); /* Adjust for perfect centering */
+}
+
+.footer-horizontal-line {
+    position: absolute;
+    top: 60%; /* Center horizontally relative to the vertical line */
+    right: 40%; /* Start from the center of the vertical divider */
+    left: 0; /* Extend to the left edge of the screen */
+    height: 1px;
+    background-color: white; /* Thin horizontal line color */
+    transform: translateY(-50%); /* Adjust for perfect centering */
+}
+
+.left-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5% 0;
+}
+
+.right-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 5% 5%;
+    text-align: right;
+}
+
+.footer-section {
+    width: 100%;
+    margin: 0;
+    padding: 4rem 0;
+    background-color: var(--blue-dark);
+    color: #ffffff;
+}
+
+.footer-section .container-fluid {
+    padding: 0 5%;
+    margin: 0;
+}
+
+.slogan-section {
+    text-align: left;
+}
+
+.slogan-label {
+    color: var(--blue-primary);
+    font-family: 'GTMedium1', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.slogan-text {
+    font-family: 'GTBlack', sans-serif;
+    font-size: 8rem;
+    line-height: 0.7;
+    width: 80%;
+    text-align: justify;
+    
+}
+
+.slogan-text span {
+    font-family: 'Saol', serif; /* Terapkan font Saol */
+    font-style: normal; /* Pastikan tidak ada gaya miring */
+}
+
+.upcoming-section {
+    text-align: right;
+}
+
+.upcoming-label {
+    color: var(--blue-primary);
+    font-size: 1rem;
+    margin-bottom: 10px; /* Add space between the label and the links */
+    text-transform: uppercase;
+    font-family: 'GTMedium1', sans-serif;
+
+}
+
+.upcoming-placeholder {
+    width: 300px;
+    height: 300px;
+    background-color: #cccccc;
+    margin-left: auto;
+    margin-bottom: 1rem;
+}
+
+.large-number {
+    font-size: 25rem;
+    font-weight: 700;
+    color: var(--blue-primary);
+    margin: 0;
+    line-height: 1;
+    font-family: 'GTMedium1', sans-serif;
+    position: relative; /* Mengatur posisi absolut */
+    bottom: -10rem; /* Memindahkan elemen ke bawah hingga setengah terlihat */
+    left: 0;
+    right: 0;
+    text-align: left;
+}
+
+.links-section {
+    text-align: right;
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    grid-template-rows: repeat(3, auto); /* 3 rows */
+    gap: 10px;
+    margin-left: 0; /* Align with the left edge of the upcoming label */
+    justify-content: start; /* Ensure links align to the left */
+}
+
+.footer-links li {
+    list-style: none;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: inherit;
+    color: var(--blue-primary);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: color 0.3s ease, transform 0.3s ease; /* Add transition for transform */
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+    transform: translateY(-3px); /* Move the arrow slightly upward */
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .slogan-section,
+    .upcoming-section,
+    .links-section {
+        text-align: center;
+    }
+    
+    .upcoming-placeholder {
+        margin: 0 auto;
+    }
+    
+    .large-number {
+        text-align: center;
+    }
+}

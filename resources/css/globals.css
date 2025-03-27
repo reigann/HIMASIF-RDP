@@ -34,6 +34,11 @@
 }
 
 @font-face {
+    font-family: 'GTMedium1';
+    src: url('/fonts/GT-Walsheim-Medium-Trial-BF651b7fc728fb3.otf') format('opentype');
+}
+
+@font-face {
     font-family: 'Saol';
     src: url('/fonts/SaolDisplay-LightItalic.ttf') format('truetype');
 }

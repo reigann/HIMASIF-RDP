@@ -142,6 +142,38 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(document.querySelector('.periode-divider-section'));
     }
 
+    // Divider Lines Animation
+    const dividerContainer = document.querySelector('.periode-divider-container');
+    if (dividerContainer) {
+        const dividerLines = document.createElement('div');
+        dividerLines.className = 'divider-lines';
+
+        // Create multiple lines
+        for (let i = 0; i < 5; i++) {
+            const line = document.createElement('div');
+            line.className = 'divider-line';
+            dividerLines.appendChild(line);
+        }
+
+        dividerContainer.appendChild(dividerLines);
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    dividerContainer.classList.add('animate');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        observer.observe(dividerContainer);
+    }
+
+    // Remove Divider Lines Animation
+    // Removed logic for creating and animating small lines in the divider section
+
     // Total Pengurus Section Animation
     const pengurusSection = document.getElementById('pengurus');
     if (pengurusSection) {

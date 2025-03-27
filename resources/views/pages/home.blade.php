@@ -15,6 +15,8 @@
     <section id="landing" class="d-flex flex-column justify-content-start align-items-center text-white position-relative overflow-hidden">
         <!-- Background Container -->
         <div class="background-container position-absolute">
+            <!-- Add noise texture div before other elements -->
+            <div class="noise-texture"></div>
             <!-- Noise Overlay -->
             <div class="noise-overlay"></div>
             
@@ -26,15 +28,13 @@
         
         <div class="landing-content text-center w-100">
             <h1 class="hero-text">HIMASIF</h1>
-            <span class="subtitle">Himpunan Mahasiswa <span>Sistem</span> Informasi</span>
+            <div class="subtitle">Himpunan Mahasiswa <span class="sistem-text">Sistem</span> Informasi</div>
         </div>
         
         <div class="bottom-info d-flex justify-content-between align-items-center w-100 px-4 position-absolute bottom-0">
             <div class="copyright">© HIMASIF 2025</div>
             <div class="scroll-indicator">
-                <div class="mouse">
-                    <div class="wheel"></div>
-                </div>
+                <div class="mouse"></div>
             </div>
             <div class="website-info">WEBSITE RESMI HIMASIF UPJ</div>
         </div>
@@ -98,17 +98,17 @@
             <div class="total-text">total</div>
             <h2 class="pengurus-title">PENGURUS</h2>
             <div class="stats-container d-flex justify-content-center align-items-center flex-wrap">
-                <div class="stat-item mx-4">
+                <div class="stat-item">
                     <div class="stat-number" data-target="25">0</div>
                     <div class="stat-label">anggota</div>
                 </div>
-                <div class="stat-divider mx-3">|</div>
-                <div class="stat-item mx-4">
+                <div class="stat-divider"></div>
+                <div class="stat-item">
                     <div class="stat-number" data-target="9">0</div>
                     <div class="stat-label">divisi</div>
                 </div>
-                <div class="stat-divider mx-3">|</div>
-                <div class="stat-item mx-4">
+                <div class="stat-divider"></div>
+                <div class="stat-item">
                     <div class="stat-number" data-target="17">0</div>
                     <div class="stat-label">proker</div>
                 </div>
@@ -124,7 +124,7 @@
                 <div class="galeri-row position-relative">
                     <div class="galeri-text-col">
                         <div class="galeri-text-content">
-                            <h2 class="galeri-title">PROFESSIONAL</h2>
+                            <h2 class="galeri-title">PROFESIONAL</h2>
                             <h2 class="galeri-subtitle"><span class="galeri-ampersand">&</span>KEKELUARGAAN</h2>
                         </div>
                     </div>
@@ -144,34 +144,29 @@
     <!-- Sorotan Section -->
     <section id="sorotan" class="position-relative">
         <div class="sorotan-bg position-absolute top-0 start-0 w-100 h-100"></div>
-        <div class="container-fluid">
-            <div class="sorotan-content">
-                <div class="row">
-                    <div class="col-lg-5 col-md-6">
-                        <div class="sorotan-text-content">
-                            <h2 class="sorotan-title">SOROTAN <span class="sorotan-yang">yang</span></h2>
-                            <h2 class="sorotan-subtitle">BISA KAMU</h2>
-                            <h2 class="sorotan-subtitle">KUNJUNGI</h2>
-                        </div>
-                    </div>
-                    <div class="col-lg-7 col-md-6">
-                        <div class="sorotan-grid row g-4">
-                            <div class="col-12">
-                                <div class="sorotan-glass-box large-box"></div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="sorotan-glass-box"></div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="sorotan-glass-box"></div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="sorotan-wrapper">
+            <!-- Top Section -->
+            <div class="sorotan-top">
+                <div class="sorotan-text">
+                    <h2 class="sorotan-title">SOROTAN <span class="sorotan-yang">yang</span></h2>
+                    <h2 class="sorotan-subtitle">BISA KAMU</h2>
+                    <h2 class="sorotan-subtitle">KUNJUNGI</h2>
+                </div>
+                <div class="sorotan-box large-box"></div>
+            </div>
+            <!-- Bottom Section -->
+            <div class="sorotan-bottom">
+                <div class="box-container">
+                    <div class="sorotan-box medium-box"></div>
+                    <div class="sorotan-box medium-box"></div>
+                    <div class="sorotan-box large-box"></div>
                 </div>
             </div>
         </div>
     </section>
 </div>
+
+@include('partials.footer')
 
 @endsection
 
