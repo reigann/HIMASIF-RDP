@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     statNumbers.forEach(statNumber => {
                         const target = parseInt(statNumber.getAttribute('data-target'));
                         let count = 0;
-                        const duration = 2500; // Smoother duration
+                        const duration = 1000; // Smoother duration
                         const frameDuration = 1000 / 60; // 60fps
                         const totalFrames = Math.ceil(duration / frameDuration);
                         const increment = target / totalFrames;
