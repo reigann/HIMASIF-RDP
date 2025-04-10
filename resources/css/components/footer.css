@@ -1,33 +1,33 @@
-@import '../globals.css'; 
+@import '../globals.css';
 
 .footer-container {
     display: flex;
     height: 100vh;
     background-color: var(--blue-dark);
     color: white;
-    padding: 2% 3%; /* Menambah padding horizontal agar lebih renggang */
-    position: relative; /* Menjadikan container sebagai referensi posisi */
+    padding: 2% 3%;
+    position: relative;
     overflow: hidden;
 }
 
 .footer-divider {
     position: absolute;
-    top: 20%; /* Moved higher to align with top of text */
-    height: 75%; /* Increased height to maintain bottom position */
-    left: 60%; /* Center the line between the sections */
+    top: 20%;
+    height: 75%;
+    left: 60%;
     width: 1px;
-    background-color: var(--blue-primary); /* Thin vertical line color */
-    transform: translateX(-50%); /* Adjust for perfect centering */
+    background-color: var(--blue-primary);
+    transform: translateX(-50%);
 }
 
 .footer-horizontal-line {
     position: absolute;
-    top: 60%; /* Center horizontally relative to the vertical line */
-    right: 40%; /* Start from the center of the vertical divider */
-    left: 0; /* Extend to the left edge of the screen */
+    top: 60%;
+    right: 40%;
+    left: 0;
     height: 1px;
-    background-color: white; /* Thin horizontal line color */
-    transform: translateY(-50%); /* Adjust for perfect centering */
+    background-color: white;
+    transform: translateY(-50%);
 }
 
 .left-section {
@@ -36,15 +36,34 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 5% 0;
+    position: relative;
 }
 
 .right-section {
     flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: flex-end;
     padding: 5% 5%;
     text-align: right;
+}
+
+/* Removed divider lines */
+
+.slogan-section {
+    text-align: left;
+    margin-bottom: 3rem;
+}
+
+.upcoming-section {
+    text-align: left;
+    margin-bottom: 3rem;
+}
+
+.links-section {
+    text-align: left;
+    margin-bottom: 3rem;
 }
 
 .footer-section {
@@ -74,11 +93,14 @@
 
 .slogan-text {
     font-family: 'GTBlack', sans-serif;
-    font-size: 8rem;
-    line-height: 0.7;
-    width: 80%;
-    text-align: justify;
-    
+    font-size: 6rem;
+    line-height: 0.8; /* Mengurangi line-height untuk merapatkan jarak */
+    width: 70%;
+    text-align: left;
+}
+
+.slogan-text br {
+    display: block; /* Memastikan line break bekerja */
 }
 
 .slogan-text span {
@@ -93,31 +115,29 @@
 .upcoming-label {
     color: var(--blue-primary);
     font-size: 1rem;
-    margin-bottom: 10px; /* Add space between the label and the links */
+    margin-bottom: 10px;
     text-transform: uppercase;
     font-family: 'GTMedium1', sans-serif;
-
 }
 
 .upcoming-placeholder {
     width: 300px;
     height: 300px;
     background-color: #cccccc;
-    margin-left: auto;
+    margin-left: auto; /* Align to the right */
     margin-bottom: 1rem;
 }
 
 .large-number {
-    font-size: 25rem;
+    font-size: 24rem; /* Mengecilkan lagi ukuran font */
     font-weight: 700;
     color: var(--blue-primary);
     margin: 0;
-    line-height: 1;
+    line-height: 0.8;
     font-family: 'GTMedium1', sans-serif;
-    position: relative; /* Mengatur posisi absolut */
-    bottom: -10rem; /* Memindahkan elemen ke bawah hingga setengah terlihat */
-    left: 0;
-    right: 0;
+    position: relative;
+    bottom: -12rem; /* Menyesuaikan posisi bottom sesuai dengan ukuran font yang baru */
+    left: -5%;
     text-align: left;
 }
 
@@ -130,8 +150,8 @@
     grid-template-columns: repeat(2, 1fr); /* 2 columns */
     grid-template-rows: repeat(3, auto); /* 3 rows */
     gap: 10px;
-    margin-left: 0; /* Align with the left edge of the upcoming label */
-    justify-content: start; /* Ensure links align to the left */
+    margin-left: auto; /* Align to the right */
+    justify-content: end;
 }
 
 .footer-links li {
@@ -155,18 +175,227 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 991px) {
-    .slogan-section,
-    .upcoming-section,
+/* Large Desktops and Laptops */
+@media (max-width: 1400px) {
+    .large-number {
+        font-size: 28rem;
+        bottom: -14rem;
+    }
+
+    .slogan-text {
+        font-size: 7rem;
+    }
+}
+
+/* Medium Desktops and Laptops */
+@media (max-width: 1200px) {
+    .large-number {
+        font-size: 25rem;
+        bottom: -12rem;
+    }
+
+    .slogan-text {
+        font-size: 6rem;
+    }
+
+    .upcoming-placeholder {
+        width: 250px;
+        height: 250px;
+    }
+
+    /* Removed divider lines */
+}
+
+/* Small Desktops and Laptops */
+@media (max-width: 992px) {
+    .footer-container {
+        /* Tetap mempertahankan layout horizontal */
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .left-section {
+        flex: 1.2;
+        position: relative;
+    }
+
+    .right-section {
+        flex: 0.8;
+    }
+
+    .slogan-text {
+        font-size: 5rem;
+        width: 90%;
+    }
+
+    .large-number {
+        font-size: 22rem;
+        /* Tetap mempertahankan posisi di bawah dengan setengah terlihat */
+        position: absolute;
+        bottom: -11rem;
+        left: 0;
+    }
+
+    /* Removed divider lines */
+
+    .upcoming-placeholder {
+        width: 200px;
+        height: 200px;
+    }
+
+    .footer-links {
+        gap: 8px;
+    }
+
+    .footer-links a {
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+        padding: 5% 5% 15rem 5%; /* Menambahkan padding-bottom untuk memberikan ruang untuk large-number */
+        position: relative;
+        overflow: hidden;
+    }
+
+    .left-section, .right-section {
+        flex: none;
+        width: 100%;
+        padding: 5% 0;
+        text-align: center;
+        align-items: center;
+        position: static; /* Untuk memungkinkan positioning absolute dari large-number */
+    }
+
+    .right-section {
+        align-items: center;
+    }
+
+    .slogan-text {
+        font-size: 4rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .slogan-text br {
+        display: none; /* Menghilangkan line break pada layar kecil */
+    }
+
+    .large-number {
+        font-size: 16rem; /* Mengecilkan lagi ukuran font */
+        position: absolute; /* Menggunakan absolute positioning */
+        bottom: -8rem; /* Menyesuaikan posisi bottom sesuai dengan ukuran font yang baru */
+        left: 0;
+        right: 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .upcoming-section {
+        text-align: center;
+    }
+
+    .upcoming-placeholder {
+        width: 180px;
+        height: 180px;
+        margin: 0 auto;
+    }
+
     .links-section {
         text-align: center;
     }
-    
-    .upcoming-placeholder {
+
+    .footer-links {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
         margin: 0 auto;
+        justify-content: center;
     }
-    
+
+    .footer-links a {
+        font-size: 0.85rem;
+    }
+
+    .footer-divider, .footer-horizontal-line {
+        display: none;
+    }
+}
+
+/* Large Phones */
+@media (max-width: 576px) {
+    .footer-container {
+        padding: 5% 5% 12rem 5%; /* Menambahkan padding-bottom untuk memberikan ruang untuk large-number */
+        position: relative;
+        overflow: hidden;
+    }
+
+    .left-section {
+        position: static; /* Untuk memungkinkan positioning absolute dari large-number */
+    }
+
+    .slogan-text {
+        font-size: 3.5rem;
+    }
+
     .large-number {
+        font-size: 14rem; /* Mengecilkan lagi ukuran font */
+        position: absolute;
+        bottom: -7rem; /* Menyesuaikan posisi bottom sesuai dengan ukuran font yang baru */
+        left: 0;
+        right: 0;
         text-align: center;
+        width: 100%;
+    }
+
+    .upcoming-placeholder {
+        width: 150px;
+        height: 150px;
+    }
+
+    .footer-links {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .slogan-label, .upcoming-label {
+        font-size: 0.9rem;
+    }
+
+    .footer-links a {
+        font-size: 0.8rem;
+    }
+}
+
+/* Small Phones */
+@media (max-width: 375px) {
+    .footer-container {
+        padding: 5% 5% 10rem 5%; /* Menambahkan padding-bottom untuk memberikan ruang untuk large-number */
+    }
+    .slogan-text {
+        font-size: 2.8rem;
+    }
+
+    .large-number {
+        font-size: 12rem; /* Mengecilkan lagi ukuran font */
+        position: absolute;
+        bottom: -6rem; /* Menyesuaikan posisi bottom sesuai dengan ukuran font yang baru */
+        left: 0;
+        right: 0;
+        text-align: center;
+    }
+
+    .upcoming-placeholder {
+        width: 120px;
+        height: 120px;
+    }
+
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 10px;
     }
 }

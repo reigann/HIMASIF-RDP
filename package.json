@@ -17,6 +17,7 @@
         "vite": "^6.2.2"
     },
     "dependencies": {
-        "bootstrap": "^5.3.3"
+        "bootstrap": "^5.3.3",
+        "gsap": "^3.12.7"
     }
 }

@@ -48,6 +48,11 @@
     src: url('/fonts/GT-Walsheim-Light-Trial-BF651b7fc714941.otf') format('opentype');
 }
 
+@font-face {
+    font-family: 'Lugoj';
+    src: url('/fonts/Lugoj.otf') format('opentype');
+}
+
 /* Color Utilities */
 .text-primary { color: var(--primary); }
 .text-secondary { color: var(--secondary); }

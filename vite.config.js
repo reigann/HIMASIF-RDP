@@ -10,8 +10,10 @@ export default defineConfig({
                 'resources/css/home.css',
                 'resources/css/components/navbar.css',
                 'resources/css/components/footer.css',
+                'resources/css/loading.css',
                 'resources/js/app.js',
-                'resources/js/home.js'
+                'resources/js/home.js',
+                'resources/js/loading.js'
             ],
             refresh: true,
         }),

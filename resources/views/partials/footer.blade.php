@@ -7,17 +7,22 @@
 </head>
 <body>
     <footer class="footer-container">
+        <!-- Left Section -->
         <div class="left-section">
             <div>
                 <p class="slogan-label">Slogan</p>
                 <h1 class="slogan-text">
-                    WE MAKE <span>IT</span> HAPPEN
+                    WE MAKE <br><span>IT</span> HAPPEN
                 </h1>
             </div>
             <h1 class="large-number">360</h1>
         </div>
-        <div class="footer-divider"></div> <!-- Thin vertical line -->
-        <div class="footer-horizontal-line"></div> <!-- Thin horizontal line -->
+
+        <!-- Divider Lines -->
+        <div class="footer-divider"></div>
+        <div class="footer-horizontal-line"></div>
+
+        <!-- Right Section -->
         <div class="right-section">
             <div>
                 <p class="upcoming-label">Acara Mendatang</p>
