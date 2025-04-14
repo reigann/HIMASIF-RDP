@@ -11,9 +11,11 @@ export default defineConfig({
                 'resources/css/components/navbar.css',
                 'resources/css/components/footer.css',
                 'resources/css/loading.css',
+                'resources/css/tentang-himasif.css',
                 'resources/js/app.js',
                 'resources/js/home.js',
-                'resources/js/loading.js'
+                'resources/js/loading.js',
+                'resources/js/tentang-himasif.js'
             ],
             refresh: true,
         }),

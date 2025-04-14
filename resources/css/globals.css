@@ -5,7 +5,7 @@
     --cyan-light: #D3FDFF;
     --blue-dark: #023047;
     --teal-dark: #004346;
-    
+
     /* Color Aliases */
     --primary: var(--blue-primary);
     --secondary: var(--blue-dark);
@@ -18,19 +18,19 @@
 @font-face {
     font-family: 'GTMedium';
     src: url('/fonts/GT-Walsheim-Condensed-Medium-Trial-BF651b7fc70de01.otf') format('opentype');
-    
+
 }
 
 @font-face {
     font-family: 'GLDDisplay';
     src: url('/fonts/GLDDisplay-Black.ttf') format('truetype');
-   
+
 }
 
 @font-face {
     font-family: 'GTBlack';
     src: url('/fonts/GT-Walsheim-Condensed-Black-Trial-BF651b7fc6a5bf5.otf') format('opentype');
-    
+
 }
 
 @font-face {
