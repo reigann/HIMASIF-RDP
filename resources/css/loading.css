@@ -1,0 +1,193 @@
+/* Minimalist Loading Animation Styles */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0047AB; /* Blue background */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    overflow: hidden;
+}
+
+.loading-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Abstract Line Background */
+.abstract-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    opacity: 0.2;
+}
+
+.abstract-line {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.5);
+    transform-origin: center;
+}
+
+/* Horizontal lines */
+.abstract-line.horizontal {
+    height: 1px;
+    width: 100%;
+    left: 0;
+}
+
+/* Vertical lines */
+.abstract-line.vertical {
+    width: 1px;
+    height: 100%;
+    top: 0;
+}
+
+/* Diagonal lines */
+.abstract-line.diagonal {
+    height: 1px;
+    width: 150%;
+    transform-origin: 0 0;
+}
+
+/* Minimalist Loading Spinner */
+.loading-spinner {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.loading-spinner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Loading Text */
+.loading-text {
+    font-family: 'GTMedium', sans-serif;
+    font-size: 1rem;
+    color: white;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+/* Loading Progress Bar */
+.loading-progress {
+    width: 120px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 1px;
+    overflow: hidden;
+    position: relative;
+}
+
+.loading-progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: white;
+    border-radius: 1px;
+    transition: width 0.3s ease-out;
+}
+
+/* Circle Animation for Completion */
+.circle-transition {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 10000;
+    pointer-events: none;
+    transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1); /* Improved easing */
+    will-change: transform; /* Optimize for animation performance */
+}
+
+.circle-transition.animate {
+    transform: translate(-50%, -50%) scale(50); /* Scale larger to ensure full coverage */
+}
+
+/* Page transition helper */
+.page-content {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+    will-change: opacity;
+}
+
+.page-content.visible {
+    opacity: 1;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.8); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0.8); opacity: 0.5; }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+    }
+
+    .loading-text {
+        font-size: 0.9rem;
+    }
+
+    .loading-progress {
+        width: 100px;
+    }
+
+    .completion-circle {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .loading-spinner {
+        width: 40px;
+        height: 40px;
+    }
+
+    .loading-text {
+        font-size: 0.8rem;
+    }
+
+    .loading-progress {
+        width: 80px;
+    }
+
+    .completion-circle {
+        width: 60px;
+        height: 60px;
+    }
+}
