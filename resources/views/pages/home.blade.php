@@ -79,12 +79,27 @@
         </div>
     </section>
 
-    <!-- Divider Section -->
-    <div class="periode-divider-section">
-        <div class="periode-divider-container d-flex align-items-center justify-content-center">
-            <div class="periode-divider-line"></div>
-            <div class="periode-divider-diamond"></div>
-            <div class="periode-divider-line"></div>
+    <!-- Marquee Text Divider -->
+    <div class="marquee-divider">
+        <!-- Top Marquee Row -->
+        <div class="marquee-row marquee-row-1">
+            <div class="marquee-track">
+                <div class="marquee-content"></div>
+            </div>
+        </div>
+
+        <!-- Middle Marquee Row -->
+        <div class="marquee-row marquee-row-2">
+            <div class="marquee-track">
+                <div class="marquee-content"></div>
+            </div>
+        </div>
+
+        <!-- Bottom Marquee Row -->
+        <div class="marquee-row marquee-row-3">
+            <div class="marquee-track">
+                <div class="marquee-content"></div>
+            </div>
         </div>
     </div>
 
@@ -144,24 +159,27 @@
     <section id="sorotan" class="position-relative">
         <div class="sorotan-bg position-absolute top-0 start-0 w-100 h-100"></div>
         <div class="sorotan-wrapper">
-            <!-- Text Section -->
-            <div class="sorotan-text">
-                <h2 class="sorotan-title">SOROTAN <span class="sorotan-yang">yang</span></h2>
-                <h2 class="sorotan-subtitle">BISA KAMU</h2>
-                <h2 class="sorotan-subtitle">KUNJUNGI</h2>
+            <!-- Top Row: Text and Large Box -->
+            <div class="sorotan-top-row">
+                <!-- Text Section -->
+                <div class="sorotan-text">
+                    <h2 class="sorotan-title">SOROTAN <span class="sorotan-yang">yang</span></h2>
+                    <h2 class="sorotan-subtitle">BISA KAMU</h2>
+                    <h2 class="sorotan-subtitle">KUNJUNGI</h2>
+                </div>
+                <!-- Large Box -->
+                <div class="sorotan-box sorotan-glass-box large-box"></div>
             </div>
-            <!-- Boxes Section -->
-            <div class="sorotan-boxes-container">
-                <!-- Left Column -->
-                <div class="sorotan-left-column">
-                    <div class="sorotan-box sorotan-glass-box large-box"></div>
-                    <div class="sorotan-box sorotan-glass-box large-box"></div>
-                </div>
-                <!-- Right Column -->
-                <div class="sorotan-right-column">
+
+            <!-- Bottom Row: 2 Medium Boxes and Large Box -->
+            <div class="sorotan-bottom-row">
+                <!-- Medium Boxes Container -->
+                <div class="sorotan-medium-boxes">
                     <div class="sorotan-box sorotan-glass-box medium-box"></div>
                     <div class="sorotan-box sorotan-glass-box medium-box"></div>
                 </div>
+                <!-- Large Box -->
+                <div class="sorotan-box sorotan-glass-box large-box"></div>
             </div>
         </div>
     </section>

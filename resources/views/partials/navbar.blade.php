@@ -72,19 +72,58 @@
         const mobileMenuClose = document.querySelector('.mobile-menu-close');
         const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
 
-        // Scroll event for navbar background
+        // Variables for scroll direction detection
+        let lastScrollTop = 0;
+        let scrollThreshold = 50; // Minimum scroll amount to trigger hide/show
+        let scrollTimeout;
+
+        // Scroll event for navbar background and auto-hide
         window.addEventListener('scroll', function() {
+            // Handle background blur effect
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
+                navbar.classList.remove('nav-hidden'); // Always show navbar at top of page
+                lastScrollTop = window.scrollY;
+                return;
             }
+
+            // Handle auto-hide based on scroll direction
+            clearTimeout(scrollTimeout);
+
+            // Determine scroll direction
+            const currentScrollTop = window.scrollY;
+            const scrollingDown = currentScrollTop > lastScrollTop;
+            const scrollDifference = Math.abs(currentScrollTop - lastScrollTop);
+
+            // Only trigger if scroll amount is significant
+            if (scrollDifference > scrollThreshold) {
+                if (scrollingDown) {
+                    // Scrolling down - hide navbar
+                    navbar.classList.add('nav-hidden');
+                } else {
+                    // Scrolling up - show navbar
+                    navbar.classList.remove('nav-hidden');
+                }
+
+                // Update last scroll position
+                lastScrollTop = currentScrollTop;
+            }
+
+            // Set a timeout to show navbar after scrolling stops
+            scrollTimeout = setTimeout(function() {
+                // If user hasn't scrolled for a while, show navbar
+                navbar.classList.remove('nav-hidden');
+            }, 3000); // Show navbar after 3 seconds of no scrolling
         });
 
         // Mobile menu toggle
         mobileMenuToggle.addEventListener('click', function() {
             document.body.classList.add('menu-open');
             mobileMenuOverlay.classList.add('active');
+            // Always show navbar when mobile menu is open
+            navbar.classList.remove('nav-hidden');
         });
 
         // Mobile menu close

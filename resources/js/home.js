@@ -48,27 +48,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Create irregular droplet shape geometry
             // Use sphere as base and modify vertices for droplet shape
-            const geometry = new THREE.SphereGeometry(1.5, 128, 128); // High detail for smooth morphing
+            const geometry = new THREE.SphereGeometry(1.8, 128, 128); // Increased size and high detail for smooth morphing
 
-            // Create white to light green shifting glass material
+            // Create blue glass material that matches the background
             const material = new THREE.MeshPhysicalMaterial({
-                color: 0xFFFFFF,      // White base color
+                color: 0x2873FF,      // Blue primary color
                 transparent: true,
-                opacity: 0.85,          // High opacity for better visibility
-                metalness: 0.1,         // Low metalness for glass look
+                opacity: 0.7,           // Slightly reduced opacity for better blending
+                metalness: 0.2,         // Slightly increased metalness for more reflective look
                 roughness: 0.05,        // Very smooth for glass look
-                transmission: 0.9,      // High transmission for glass effect
+                transmission: 0.85,     // High transmission for glass effect
                 thickness: 0.5,         // Glass thickness
-                envMapIntensity: 1.2,   // For reflections
+                envMapIntensity: 1.5,   // Increased for more reflections
                 clearcoat: 1.0,         // Clear coat for extra shine
                 clearcoatRoughness: 0.03,
                 side: THREE.DoubleSide,
                 flatShading: false,     // Smooth shading for glass
-                emissive: 0x88FF88,     // Light green emissive glow
-                emissiveIntensity: 0.3  // Moderate glow
+                emissive: 0x0047AB,     // Blue emissive glow
+                emissiveIntensity: 0.4  // Increased glow
             });
 
-            // We'll use color shifting in the animation loop to transition between white and light green
+            // We'll use color shifting in the animation loop to transition between blue shades
 
             // Create main blob mesh
             const blob = new THREE.Mesh(geometry, material);
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Create additional abstract glass elements
             const smallBlobs = [];
-            const smallBlobsCount = 8; // More elements for richer scene
+            const smallBlobsCount = 12; // Increased number of elements for richer scene
 
             // Array of different geometry types for variety
             const geometryTypes = [
@@ -87,13 +87,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 () => new THREE.BoxGeometry(0.4, 0.4, 0.4, 2, 2, 2)                  // Cube
             ];
 
-            // Array of white and light green colors
+            // Array of blue colors that match the background gradient
             const colors = [
-                0xFFFFFF,  // White
-                0xF0FFF0,  // Honeydew (very light green)
-                0xE0FFE0,  // Lighter green
-                0xCCFFCC,  // Light green
-                0x88FF88   // Medium light green
+                0x2873FF,  // Blue primary (--blue-primary)
+                0x1E5DCB,  // Slightly darker blue
+                0x0047AB,  // Cobalt blue (medium)
+                0x023047,  // Dark blue (--blue-dark)
+                0xC3E3FD   // Light blue (--blue-light)
             ];
 
             for (let i = 0; i < smallBlobsCount; i++) {
@@ -101,22 +101,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 const geometryCreator = geometryTypes[Math.floor(Math.random() * geometryTypes.length)];
                 const smallGeometry = geometryCreator();
 
-                // Create white to light green glass material
+                // Create blue glass material that matches the background
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 const smallMaterial = new THREE.MeshPhysicalMaterial({
                     color: color,
                     transparent: true,
-                    opacity: 0.85,                     // High opacity for better visibility
-                    metalness: 0.1,                    // Low metalness for glass look
-                    roughness: 0.05,                   // Very smooth for glass look
-                    transmission: 0.9,                 // High transmission for glass effect
+                    opacity: 0.75,                    // Slightly reduced opacity for better blending
+                    metalness: 0.2,                   // Slightly increased metalness for more reflective look
+                    roughness: 0.05,                  // Very smooth for glass look
+                    transmission: 0.85,               // High transmission for glass effect
                     thickness: 0.3,
-                    clearcoat: 1.0,                    // Glossy coating
+                    clearcoat: 1.0,                   // Glossy coating
                     clearcoatRoughness: 0.03,
                     side: THREE.DoubleSide,
-                    flatShading: false,                // Smooth shading for glass look
-                    emissive: 0x88FF88,                // Light green emissive glow
-                    emissiveIntensity: 0.2 + Math.random() * 0.2  // Varying glow intensity
+                    flatShading: false,               // Smooth shading for glass look
+                    emissive: color === 0xC3E3FD ? 0x2873FF : color, // Use blue emissive for light blue elements
+                    emissiveIntensity: 0.3 + Math.random() * 0.3  // Increased and varying glow intensity
                 });
 
                 // Create mesh and position in 3D space around main blob
@@ -157,27 +157,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
 
-            // Enhanced lighting for glass effect
+            // Enhanced lighting for glass effect with blue tones
             // Ambient light for base illumination
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+            const ambientLight = new THREE.AmbientLight(0x2873FF, 0.5);
             scene.add(ambientLight);
 
             // Directional light for main illumination
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            const directionalLight = new THREE.DirectionalLight(0xC3E3FD, 0.8);
             directionalLight.position.set(5, 5, 5);
             scene.add(directionalLight);
 
             // Colored point lights for interesting reflections
-            const pointLight1 = new THREE.PointLight(0x4fc3dc, 2, 10);
+            const pointLight1 = new THREE.PointLight(0x2873FF, 2, 10); // Blue primary
             pointLight1.position.set(2, 3, 4);
             scene.add(pointLight1);
 
-            const pointLight2 = new THREE.PointLight(0xff2d75, 2, 10);
+            const pointLight2 = new THREE.PointLight(0x0047AB, 2, 10); // Cobalt blue
             pointLight2.position.set(-2, -3, 4);
             scene.add(pointLight2);
 
             // Additional subtle lights
-            const pointLight3 = new THREE.PointLight(0x0047AB, 1, 15);
+            const pointLight3 = new THREE.PointLight(0xC3E3FD, 1.5, 15); // Light blue
             pointLight3.position.set(-5, 0, -5);
             scene.add(pointLight3);
 
@@ -185,16 +185,16 @@ document.addEventListener('DOMContentLoaded', function() {
             const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(256);
             cubeRenderTarget.texture.type = THREE.HalfFloatType;
 
-            // Create a blue gradient background
+            // Create a blue gradient background that matches the site theme
             const bgCanvas = document.createElement('canvas');
             bgCanvas.width = 2;
             bgCanvas.height = 2;
 
             const bgContext = bgCanvas.getContext('2d');
             const bgGradient = bgContext.createLinearGradient(0, 0, 0, 2);
-            bgGradient.addColorStop(0, '#0047AB'); // Cobalt blue (top)
-            bgGradient.addColorStop(0.5, '#0073CF'); // Medium blue (middle)
-            bgGradient.addColorStop(1, '#00529B'); // Darker blue (bottom)
+            bgGradient.addColorStop(0, '#2873FF'); // Blue primary (top) (--blue-primary)
+            bgGradient.addColorStop(0.5, '#0047AB'); // Cobalt blue (middle)
+            bgGradient.addColorStop(1, '#023047'); // Dark blue (bottom) (--blue-dark)
 
             bgContext.fillStyle = bgGradient;
             bgContext.fillRect(0, 0, 2, 2);
@@ -280,15 +280,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 const pulseFactor = 1 + cursorIntensity * 0.1 * Math.sin(time * 5);
                 blob.scale.set(pulseFactor, pulseFactor, pulseFactor);
 
-                // Color shift effect from white to light green
+                // Color shift effect between blue shades
                 const colorPulse = Math.sin(time * 2) * 0.5 + 0.5; // 0 to 1 pulsing value
-                const whiteColor = new THREE.Color(0xFFFFFF);
-                const lightGreenColor = new THREE.Color(0x88FF88);
-                const mixedColor = new THREE.Color().lerpColors(whiteColor, lightGreenColor, colorPulse);
+                const primaryBlue = new THREE.Color(0x2873FF); // Blue primary
+                const lightBlue = new THREE.Color(0xC3E3FD); // Light blue
+                const mixedColor = new THREE.Color().lerpColors(primaryBlue, lightBlue, colorPulse);
 
                 // Update material colors
                 material.color.copy(mixedColor);
-                material.emissiveIntensity = 0.2 + colorPulse * 0.3; // Increase glow with green shift
+                material.emissiveIntensity = 0.3 + colorPulse * 0.4; // Increase glow with color shift
 
                 // Animate vertices for water droplet effect
                 for (let i = 0; i < dropletPositionAttribute.count; i++) {
@@ -495,55 +495,213 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Periode Divider Animation
-    const periodeDivider = document.querySelector('.periode-divider-container');
-    if (periodeDivider) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    periodeDivider.classList.add('animate');
+    // Marquee Text Divider Animation
+    const initMarqueeDivider = () => {
+        const marqueeDivider = document.querySelector('.marquee-divider');
+        if (!marqueeDivider) return;
+
+        const marqueeContents = marqueeDivider.querySelectorAll('.marquee-content');
+        const text = 'HIMASIF SIF360 ';
+
+        // Create duplicate elements for infinite scrolling
+        const setupInfiniteScroll = () => {
+            // For each row, create content elements for seamless looping
+            const rows = marqueeDivider.querySelectorAll('.marquee-row');
+
+            rows.forEach((row, index) => {
+                const track = row.querySelector('.marquee-track');
+                const content = row.querySelector('.marquee-content');
+
+                // Clear existing content
+                if (content) {
+                    content.textContent = '';
+                }
+
+                // For row 2 (index 1), we'll create multiple content elements for a different loop effect
+                if (index === 1) {
+                    // Create multiple content elements for row 2 to create a continuous loop
+                    // We'll create enough to fill the screen width multiple times
+                    for (let i = 0; i < 10; i++) {
+                        const contentClone = document.createElement('div');
+                        contentClone.className = 'marquee-content-item row2-item';
+                        contentClone.style.display = 'inline-block';
+                        contentClone.style.whiteSpace = 'nowrap';
+
+                        // For row 2, we use shorter repetitions as we'll have multiple elements
+                        contentClone.textContent = text.repeat(5);
+                        contentClone.style.color = 'var(--blue-light)';
+
+                        // Add to track
+                        if (track) {
+                            track.appendChild(contentClone);
+                        }
+                    }
                 } else {
-                    periodeDivider.classList.remove('animate');
+                    // For rows 1 and 3, keep the original approach with two long content elements
+                    for (let i = 0; i < 2; i++) {
+                        const contentClone = document.createElement('div');
+                        contentClone.className = 'marquee-content-item';
+                        contentClone.style.display = 'inline-block';
+                        contentClone.style.whiteSpace = 'nowrap';
+
+                        // Add a lot of repetitions to ensure it's long enough
+                        const repetitions = 50; // Large number to ensure it's long enough
+                        contentClone.textContent = text.repeat(repetitions);
+                        contentClone.style.color = 'var(--blue-light)';
+
+                        // Add to track
+                        if (track) {
+                            track.appendChild(contentClone);
+                        }
+                    }
                 }
             });
-        }, {
-            threshold: 0.5,
-            rootMargin: '0px 0px -20% 0px'
-        });
-        observer.observe(document.querySelector('.periode-divider-section'));
-    }
+        };
 
-    // Divider Lines Animation
-    const dividerContainer = document.querySelector('.periode-divider-container');
-    if (dividerContainer) {
-        const dividerLines = document.createElement('div');
-        dividerLines.className = 'divider-lines';
+        // Set up infinite scroll
+        setupInfiniteScroll();
 
-        // Create multiple lines
-        for (let i = 0; i < 5; i++) {
-            const line = document.createElement('div');
-            line.className = 'divider-line';
-            dividerLines.appendChild(line);
-        }
+        // Calculate content width for each row
+        const calculateContentWidths = () => {
+            const rows = marqueeDivider.querySelectorAll('.marquee-row');
+            const contentWidths = [];
 
-        dividerContainer.appendChild(dividerLines);
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    dividerContainer.classList.add('animate');
-                    observer.unobserve(entry.target);
+            rows.forEach(row => {
+                const contentItem = row.querySelector('.marquee-content-item');
+                if (contentItem) {
+                    contentWidths.push(contentItem.offsetWidth);
+                } else {
+                    contentWidths.push(0);
                 }
             });
-        }, {
-            threshold: 0.5
+
+            return contentWidths;
+        };
+
+        // Get content widths
+        const contentWidths = calculateContentWidths();
+
+        // Animation variables
+        let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        let scrollDirection = 0;
+        let scrollSpeed = 0;
+        let baseSpeed = 0.5; // Base speed when not scrolling
+
+        // Animation state for each row
+        const rows = [
+            { position: 0, direction: -1, speed: baseSpeed, element: marqueeDivider.querySelector('.marquee-row-1 .marquee-track') },
+            { position: 0, direction: 1, speed: baseSpeed * 0.8, element: marqueeDivider.querySelector('.marquee-row-2 .marquee-track') },
+            { position: 0, direction: -1, speed: baseSpeed * 1.2, element: marqueeDivider.querySelector('.marquee-row-3 .marquee-track') }
+        ];
+
+        // Scroll event to control animation speed
+        window.addEventListener('scroll', () => {
+            const st = window.pageYOffset || document.documentElement.scrollTop;
+            scrollDirection = st > lastScrollTop ? 1 : -1;
+
+            // Calculate scroll speed
+            const scrollDelta = Math.abs(st - lastScrollTop);
+            scrollSpeed = Math.min(scrollDelta / 10, 8); // Limit max speed
+
+            lastScrollTop = st;
         });
 
-        observer.observe(dividerContainer);
-    }
+        // Skew effect based on scroll speed
+        const updateSkew = () => {
+            const skewIntensity = Math.min(Math.abs(scrollSpeed) * 0.7, 10);
+            const skewAngle = scrollDirection * skewIntensity;
 
-    // Remove Divider Lines Animation
-    // Removed logic for creating and animating small lines in the divider section
+            gsap.to('.marquee-row-1 .marquee-content-item', {
+                skewX: -skewAngle,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+
+            // For row 2, target the specific row2-item class
+            gsap.to('.row2-item', {
+                skewX: skewAngle,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+
+            gsap.to('.marquee-row-3 .marquee-content-item', {
+                skewX: -skewAngle,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        };
+
+        // Animation loop
+        const animate = () => {
+            // Update speeds based on scroll
+            rows.forEach((row, index) => {
+                // Base speed + scroll influence
+                const targetSpeed = baseSpeed + (scrollSpeed * 0.5 * scrollDirection * row.direction);
+                // Smooth transition to target speed
+                row.speed += (targetSpeed - row.speed) * 0.1;
+
+                // Ensure row 2 always moves right
+                if (row === rows[1]) {
+                    row.speed = Math.abs(row.speed) * row.direction;
+                }
+
+                // Update position
+                row.position += row.speed;
+
+                // Apply transform
+                if (row.element) {
+                    row.element.style.transform = `translateX(${row.position * row.direction}px)`;
+                }
+
+                // Reset position for seamless infinite loop
+                if (index === 1) { // Special handling for row 2
+                    // Get all row2 items
+                    const row2Items = document.querySelectorAll('.row2-item');
+                    if (row2Items.length > 0) {
+                        // Get the width of a single item
+                        const itemWidth = row2Items[0].offsetWidth;
+
+                        // When an item moves completely off-screen to the right
+                        if (row.position > itemWidth) {
+                            // Move the first item to the end to create a continuous loop
+                            const firstItem = row2Items[0];
+                            const track = row.element;
+                            if (track && firstItem) {
+                                track.appendChild(firstItem);
+                                // Reset position by the width of the moved item
+                                row.position -= itemWidth;
+                            }
+                        }
+                    }
+                } else {
+                    // For rows 1 and 3, use the original reset logic
+                    const contentWidth = contentWidths[index] || 0;
+                    if (Math.abs(row.position) >= contentWidth) {
+                        // Reset to create the illusion of infinite scrolling
+                        row.position = 0;
+                    }
+                }
+            });
+
+            // Apply skew effect
+            updateSkew();
+
+            // Gradually reduce scroll speed when not scrolling
+            if (Math.abs(scrollSpeed) > 0.1) {
+                scrollSpeed *= 0.95;
+            } else {
+                scrollSpeed = 0;
+            }
+
+            requestAnimationFrame(animate);
+        };
+
+        // Start animation
+        animate();
+    };
+
+    // Initialize marquee divider
+    initMarqueeDivider();
 
     // Total Pengurus Section Animation
     const pengurusSection = document.getElementById('pengurus');

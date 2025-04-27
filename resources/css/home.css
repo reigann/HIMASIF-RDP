@@ -232,74 +232,174 @@
     padding-bottom: 0.25rem;
 }
 
-/* Divider Section */
-.periode-divider-section {
+/* Marquee Text Divider */
+.marquee-divider {
     background-color: var(--blue-dark);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 8rem 0; /* Matched with other sections */
+    overflow: hidden;
+    position: relative;
 }
 
-.periode-divider-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Marquee Rows */
+.marquee-row {
+    position: relative;
     width: 100%;
-    gap: 1.5rem;
+    height: 8rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
 }
 
-.periode-divider-container.animate {
-    opacity: 1;
-    transform: translateY(0);
+/* Different heights for each row */
+.marquee-row-1 {
+    height: 7rem; /* Increased height for better proportion */
+    margin-bottom: -0.5rem; /* Adjusted margin */
 }
 
-.periode-divider-line {
-    height: 1px;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0));
-    flex: 1;
-    max-width: 35%;
-    transform: scaleX(0);
-    transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+.marquee-row-2 {
+    height: 8rem; /* Increased height for better proportion */
+    margin-bottom: -0.5rem; /* Adjusted margin */
 }
 
-.periode-divider-container.animate .periode-divider-line {
-    transform: scaleX(1);
+.marquee-row-3 {
+    height: 7rem; /* Increased height for better proportion */
 }
 
-.periode-divider-diamond {
-    width: 10px;
-    height: 10px;
-    background-color: white;
-    transform: rotate(45deg) scale(0);
-    margin: 0;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-    transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s;
+/* Marquee Track */
+.marquee-track {
+    position: absolute;
+    white-space: nowrap;
+    will-change: transform;
+    width: 100%;
 }
 
-.periode-divider-container.animate .periode-divider-diamond {
-    transform: rotate(45deg) scale(1);
-    animation: diamondPulse 2.5s infinite ease-in-out;
+/* Marquee Content */
+.marquee-content {
+    display: inline-block;
+    font-family: 'GTBlack', sans-serif;
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 0.9; /* Reduced line height to make text more compact */
 }
 
-@keyframes diamondPulse {
-    0% { transform: rotate(45deg) scale(1); box-shadow: 0 0 15px rgba(255, 255, 255, 0.8); }
-    50% { transform: rotate(45deg) scale(1.2); box-shadow: 0 0 25px rgba(255, 255, 255, 1); }
-    100% { transform: rotate(45deg) scale(1); box-shadow: 0 0 15px rgba(255, 255, 255, 0.8); }
+/* Marquee Content Item (dynamically created) */
+.marquee-content-item {
+    font-family: 'GTBlack', sans-serif;
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 0.9;
 }
 
-.divider-lines {
-    display: none;
+/* Special styling for row 2 items */
+.row2-item {
+    margin-right: 0; /* No margin between items for seamless appearance */
+    transition: transform 0.3s ease; /* Smooth transition for any transforms */
 }
 
-.divider-line {
-    display: none;
+/* Styling for each row */
+.marquee-row-1 .marquee-content-item {
+    font-size: 6.5rem; /* Increased for better proportion */
+    color: var(--blue-light);
 }
+
+.marquee-row-2 .marquee-content-item {
+    font-size: 7.5rem; /* Increased for better proportion */
+    color: var(--blue-light); /* Same color as other rows */
+}
+
+.marquee-row-3 .marquee-content-item {
+    font-size: 6.5rem; /* Increased for better proportion */
+    color: var(--blue-light);
+}
+
+/* No hover effects */
+
+/* Responsive styles */
+@media (max-width: 1400px) {
+    .marquee-divider {
+        padding: 7rem 0;
+    }
+    .marquee-row-1, .marquee-row-3 {
+        height: 6rem;
+        margin-bottom: -0.5rem;
+    }
+    .marquee-row-2 {
+        height: 7rem;
+        margin-bottom: -0.5rem;
+    }
+    .marquee-row-1 .marquee-content-item, .marquee-row-3 .marquee-content-item {
+        font-size: 5.5rem;
+    }
+    .marquee-row-2 .marquee-content-item {
+        font-size: 6.5rem;
+        color: var(--blue-light);
+    }
+}
+
+@media (max-width: 992px) {
+    .marquee-divider {
+        padding: 6rem 0;
+    }
+    .marquee-row-1, .marquee-row-3 {
+        height: 5rem;
+        margin-bottom: -0.4rem;
+    }
+    .marquee-row-2 {
+        height: 6rem;
+        margin-bottom: -0.4rem;
+    }
+    .marquee-row-1 .marquee-content-item, .marquee-row-3 .marquee-content-item {
+        font-size: 4.5rem;
+    }
+    .marquee-row-2 .marquee-content-item {
+        font-size: 5.5rem;
+        color: var(--blue-light);
+    }
+}
+
+@media (max-width: 768px) {
+    .marquee-divider {
+        padding: 5rem 0;
+    }
+    .marquee-row-1, .marquee-row-3 {
+        height: 4rem;
+        margin-bottom: -0.3rem;
+    }
+    .marquee-row-2 {
+        height: 5rem;
+        margin-bottom: -0.3rem;
+    }
+    .marquee-row-1 .marquee-content-item, .marquee-row-3 .marquee-content-item {
+        font-size: 3.5rem;
+    }
+    .marquee-row-2 .marquee-content-item {
+        font-size: 4.5rem;
+        color: var(--blue-light);
+    }
+}
+
+@media (max-width: 576px) {
+    .marquee-divider {
+        padding: 4rem 0; /* Reduced padding for mobile but still substantial */
+    }
+    .marquee-row-1, .marquee-row-3 {
+        height: 3rem;
+        margin-bottom: -0.2rem;
+    }
+    .marquee-row-2 {
+        height: 4rem;
+        margin-bottom: -0.2rem;
+    }
+    .marquee-row-1 .marquee-content-item, .marquee-row-3 .marquee-content-item {
+        font-size: 2.5rem;
+    }
+    .marquee-row-2 .marquee-content-item {
+        font-size: 3.5rem;
+        color: var(--blue-light);
+    }
+}
+
+
 
 /* Total Pengurus Section */
 #pengurus {
@@ -495,12 +595,13 @@
 
 /* Sorotan Section */
 #sorotan {
-    height: 100vh;
     position: relative;
     overflow: hidden;
-    padding: 0;
+    padding: 8rem 0; /* Match padding with other sections */
     display: flex;
     align-items: center;
+    justify-content: center; /* Center content horizontally */
+    min-height: 100vh; /* Ensure section has enough height */
 }
 
 .sorotan-wrapper {
@@ -509,25 +610,15 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    padding: 0 10px;
-}
-
-.sorotan-top {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
-
-.sorotan-text {
-    width: 35%;
-    padding-left: 100px;
+    gap: 20px; /* Reduced gap between rows from 40px to 20px */
+    padding: 0; /* Remove padding since section already has padding */
+    justify-content: center; /* Center content vertically */
+    height: 100%; /* Take full height of the section */
 }
 
 .sorotan-title {
     font-family: 'GTBlack', sans-serif;
-    font-size: 4rem;
+    font-size: 5rem; /* Increased from 4rem to 5rem */
     color: white;
     margin-bottom: 0.25rem;
     text-transform: uppercase;
@@ -537,7 +628,7 @@
 .sorotan-yang {
     font-family: 'Saol', serif;
     font-style: italic;
-    font-size: 3.5rem;
+    font-size: 4.5rem; /* Increased from 3.5rem to 4.5rem */
     text-transform: none;
     color: white;
     margin-left: 0.5rem;
@@ -545,28 +636,37 @@
 
 .sorotan-subtitle {
     font-family: 'GTBlack', sans-serif;
-    font-size: 4rem;
+    font-size: 5rem; /* Increased from 4rem to 5rem */
     color: white;
     margin: 0;
     text-transform: uppercase;
     line-height: 1;
 }
 
-.large-box {
-    width: 100%;
-    height: 300px;
+/* Box Sizing */
+.large-box, .medium-box {
+    height: 300px; /* All boxes have the same height */
 }
 
-.sorotan-bottom .box-container {
+/* Specific sizing for top row */
+.sorotan-top-row .large-box {
+    flex: 1; /* Take remaining space in the top row */
+}
+
+/* Specific sizing for bottom row */
+.sorotan-bottom-row .large-box {
+    width: 60%; /* Large box takes 60% of bottom row */
+}
+
+.sorotan-medium-boxes {
+    width: 40%; /* Medium boxes container takes 40% of bottom row */
     display: flex;
-    gap: 20px;
-    align-items: center;
-    flex-wrap: nowrap;
+    flex-direction: row; /* Horizontal layout */
+    gap: 20px; /* Reduced gap for horizontal layout */
 }
 
-.sorotan-bottom .medium-box {
-    width: calc((100% - 100px) / 4);
-    height: 180px;
+.sorotan-medium-boxes .medium-box {
+    width: calc(50% - 10px); /* Each medium box takes half width minus half gap */
 }
 
 .sorotan-box {
@@ -579,52 +679,22 @@
     cursor: pointer;
 }
 
-.sorotan-wrapper {
-    padding: 100px;
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
 .sorotan-text {
     width: 300px;
     flex-shrink: 0;
-    padding-left: 100px; /* Add padding to match section padding */
+    padding-left: 0;
 }
 
 .sorotan-top {
     display: flex;
     gap: 10px;
     align-items: flex-start;
-    margin-left: -100px; /* Negative margin to offset padding */
 }
 
-.sorotan-wrapper {
-    padding: 100px;
-    width: calc(100% - 200px); /* Adjust for padding */
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
 
-.sorotan-top {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    margin-bottom: 40px;
-}
-
-.sorotan-text {
-    width: 180px; /* Reduced from 200px */
-    flex-shrink: 0;
-}
 
 .sorotan-top .large-box {
     flex: 1;
-    height: 300px;
     min-width: calc(100% - 190px); /* Adjusted to match new text width */
 }
 
@@ -636,52 +706,43 @@
 
 .sorotan-bottom .medium-box {
     width: calc((100% - 40px) / 2); /* Adjust width to account for gap */
-    height: 300px;
 }
 
 .sorotan-bottom .large-box {
     width: 100%;
-    height: 300px;
     margin-top: 40px;
 }
 
-.sorotan-wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 10px;
-}
 
-.sorotan-boxes-container {
+
+/* Top Row: Text and Large Box */
+.sorotan-top-row {
     display: flex;
     gap: 40px;
     width: 100%;
-    margin-top: 20px;
-}
-
-.sorotan-left-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Reduced gap between boxes */
-    width: 60%;
-}
-
-.sorotan-right-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Reduced gap between boxes */
-    width: 40%;
+    align-items: center; /* Center items vertically */
+    margin-bottom: 10px; /* Reduced space between rows from 20px to 10px */
 }
 
 .sorotan-text {
     flex: 0 0 auto;
-    padding-top: 0;
+    width: 300px; /* Fixed width for text section */
+    padding-left: 0;
+}
+
+/* Bottom Row: Large Box and Medium Boxes */
+.sorotan-bottom-row {
+    display: flex;
+    gap: 40px;
     width: 100%;
-    padding-left: 10px;
-    margin-bottom: 20px;
+    margin-top: 10px; /* Reduced space between rows from 20px to 10px */
+}
+
+/* Medium Boxes Container */
+.sorotan-medium-boxes {
+    display: flex;
+    gap: 40px;
+    flex: 1; /* Take remaining space */
 }
 
 .sorotan-box {
@@ -718,7 +779,6 @@
 
 .sorotan-top .large-box {
     flex: 1;
-    height: 300px;
 }
 
 .sorotan-bottom .box-container {
@@ -730,7 +790,6 @@
 
 .medium-box {
     width: 100%;
-    height: 300px;
 }
 
 .sorotan-box:hover {
@@ -761,32 +820,7 @@
     padding-right: 2rem;
 }
 
-.sorotan-title {
-    font-family: 'GTBlack', sans-serif;
-    font-size: 3.5rem;
-    color: white;
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-    line-height: 1;
-}
-
-.sorotan-yang {
-    font-family: 'Saol', serif;
-    font-style: italic;
-    font-size: 2.5rem;
-    text-transform: none;
-    color: white;
-    margin-left: 0.5rem;
-}
-
-.sorotan-subtitle {
-    font-family: 'GTBlack', sans-serif;
-    font-size: 3.5rem;
-    color: white;
-    margin-bottom: 0.25rem;
-    text-transform: uppercase;
-    line-height: 1;
-}
+/* Duplicate styles removed */
 
 .sorotan-grid {
     display: grid;
@@ -808,11 +842,6 @@
 
 .sorotan-box.large-box {
     grid-column: span 2;
-    height: 300px;
-}
-
-.sorotan-box.medium-box {
-    height: 150px;
 }
 
 .sorotan-box:hover {
@@ -836,8 +865,22 @@
         padding-top: 3rem;
     }
     .subtitle { font-size: 1.9rem; word-spacing: 13.5rem; } /* Adjusted to align with HIMASIF text */
-    .sorotan-wrapper {
-        padding: 60px; /* Reduced padding for smaller screens */
+    #sorotan {
+        padding: 7rem 0; /* Slightly reduced padding for smaller screens */
+        min-height: 90vh; /* Slightly reduced height for smaller screens */
+    }
+
+    /* Sorotan responsive styles */
+    .sorotan-top-row, .sorotan-bottom-row {
+        gap: 30px;
+    }
+
+    .sorotan-medium-boxes {
+        gap: 30px;
+    }
+
+    .sorotan-text {
+        width: 250px;
     }
 }
 
@@ -847,6 +890,49 @@
         padding-top: 2.5rem;
     }
     .subtitle { font-size: 1.8rem; word-spacing: 11.5rem; } /* Adjusted to align with HIMASIF text */
+
+    /* Sorotan responsive styles */
+    #sorotan {
+        padding: 6rem 0; /* Further reduced padding for medium screens */
+        min-height: 80vh; /* Further reduced height for medium screens */
+    }
+
+    .sorotan-top-row {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .sorotan-text {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .sorotan-top-row .large-box {
+        width: 100%;
+    }
+
+    .sorotan-bottom-row {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .sorotan-bottom-row .large-box {
+        width: 100%;
+        order: 2; /* Move large box to the bottom on smaller screens */
+    }
+
+    .sorotan-medium-boxes {
+        width: 100%;
+        display: flex;
+        flex-direction: row; /* Change to row on smaller screens */
+        gap: 30px;
+        order: 1; /* Move medium boxes to the top on smaller screens */
+    }
+
+    .sorotan-medium-boxes .medium-box {
+        width: calc(50% - 15px); /* Half width minus half of the gap */
+        height: 300px; /* Same height as large box */
+    }
 }
 
 @media (max-width: 768px) {
@@ -860,14 +946,37 @@
     .pengurus-title { font-size: 8rem; }
     .stat-number { font-size: 5rem; }
     .stat-label { font-size: 1.5rem; }
-    .sorotan-wrapper {
-        padding: 40px; /* Further reduced padding for mobile */
+    #sorotan {
+        padding: 5rem 0; /* Further reduced padding for mobile */
+        min-height: auto; /* Let content determine height on mobile */
     }
     .periode-container {
         align-items: center; /* Center items on mobile */
     }
     .periode-right {
         padding-top: 0; /* Remove padding on mobile */
+    }
+
+    /* Sorotan responsive styles */
+    .sorotan-medium-boxes {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .large-box, .medium-box {
+        height: 250px; /* Reduced height for mobile but still the same for all boxes */
+    }
+
+    .sorotan-title {
+        font-size: 4rem; /* Increased from 3rem to 4rem */
+    }
+
+    .sorotan-subtitle {
+        font-size: 4rem; /* Increased from 3rem to 4rem */
+    }
+
+    .sorotan-yang {
+        font-size: 3.5rem; /* Increased from 2.5rem to 3.5rem */
     }
 }
 
@@ -884,6 +993,31 @@
     .pengurus-title { font-size: 6rem; }
     .stat-number { font-size: 4rem; }
     .stat-label { font-size: 1.2rem; }
+
+    /* Sorotan responsive styles */
+    #sorotan {
+        padding: 4rem 0; /* Minimal padding for very small screens */
+    }
+
+    .sorotan-top-row, .sorotan-bottom-row, .sorotan-medium-boxes {
+        gap: 20px;
+    }
+
+    .large-box, .medium-box {
+        height: 200px; /* Reduced height for small screens but still the same for all boxes */
+    }
+
+    .sorotan-title {
+        font-size: 3rem; /* Increased from 2.5rem to 3rem */
+    }
+
+    .sorotan-subtitle {
+        font-size: 3rem; /* Increased from 2.5rem to 3rem */
+    }
+
+    .sorotan-yang {
+        font-size: 2.5rem; /* Increased from 2rem to 2.5rem */
+    }
 }
 
 /* Remove horizontal lines styles */

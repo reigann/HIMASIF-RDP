@@ -8,7 +8,7 @@
     justify-content: space-between;
     padding: 0 20px;  /* Changed from 8rem to 20px */
     text-transform: uppercase;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, transform 0.4s ease-in-out;
     position: fixed;
     width: 100%;
     left: 0;  /* Added to ensure full width */
@@ -18,6 +18,7 @@
     background-color: transparent;
     backdrop-filter: blur(0px);
     -webkit-backdrop-filter: blur(0px);
+    transform: translateY(0); /* Initial position */
 }
 
 .navbar.scrolled {
@@ -25,6 +26,16 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Class for hiding navbar when scrolling down */
+.navbar.nav-hidden {
+    transform: translateY(-100%); /* Move navbar up out of view */
+}
+
+/* Show navbar when hovered, even if it's hidden */
+.navbar:hover {
+    transform: translateY(0) !important;
 }
 
 /* Make container styles specific to navbar */

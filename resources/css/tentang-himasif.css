@@ -9,97 +9,458 @@
     overflow: hidden;
 }
 
+.section-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 /* Landing Section */
-#landing-tentang-himasif {
+#landing {
+    background: linear-gradient(135deg, var(--blue-primary), var(--blue-dark));
     color: var(--white);
-    min-height: 100vh;
+    padding-top: 30px;
 }
 
-/* Make sure background image covers the entire section */
-.background-container img {
-    object-fit: cover;
-    will-change: transform;
+.background-container {
+    position: absolute;
+    top: -20%;
+    left: -20%;
+    width: 140%;
+    height: 140%;
+    z-index: 0;
+    overflow: hidden;
+    transition: transform 0.5s ease-out;
 }
 
-/* Add overlay to improve text readability */
-.background-container::after {
-    content: '';
+.noise-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
-    z-index: 2;
+    opacity: 0.15;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0.5 0' result='colorNoise'/%3E%3CfeComposite operator='in' in='colorNoise' in2='SourceGraphic'/%3E%3CfeBlend mode='multiply' in2='SourceGraphic' result='blend'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-size: 150px 150px;
     pointer-events: none;
+    animation: sparkleNoise 10s linear infinite;
+    mix-blend-mode: soft-light;
 }
 
-/* Landing content styling */
+.noise-texture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.12;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-size: 100px 100px;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: overlay;
+    animation: moveNoise 8s linear infinite;
+}
+
+@keyframes moveNoise {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(-20px, 20px); }
+    100% { transform: translate(0, 0); }
+}
+
+@keyframes sparkleNoise {
+    0%, 100% { opacity: 0.06; background-position: 0 0; filter: brightness(1); }
+    50% { opacity: 0.08; background-position: 40px 20px; filter: brightness(1.2); }
+}
+
+.curved-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: center center;
+    transition: transform 0.8s ease-out;
+}
+
 .landing-content {
-    padding: 2rem;
-    text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 2;
 }
 
-/* Tentang text styling with Saol font */
-.tentang-text {
+.hero-text {
+    font-family: 'GLDDisplay', sans-serif;
+    font-size: 25rem;
+    margin-bottom: -1rem;
+    letter-spacing: -0.5rem;
+    line-height: 0.85;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    user-select: none;
+    padding-top: 4rem;
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 3rem;
+    text-transform: lowercase;
+    letter-spacing: -3%;
+    font-family: 'GTBlack', sans-serif;
+    word-spacing: 14rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.sistem-text {
     font-family: 'Saol', serif;
     font-style: italic;
-    font-size: 5rem;
-    color: white;
-    margin-bottom: 5px;
-    opacity: 0.9;
-    line-height: 1;
-    transition: transform 0.3s ease;
-    will-change: transform;
+    color: var(--blue-light);
 }
 
-/* HIMASIF text styling with Lugoj font */
-.himasif-text {
-    font-family: 'Lugoj', sans-serif;
-    font-size: 20rem;
-    color: white;
-    line-height: 1;
-    letter-spacing: -0.02em;
-    margin: 0;
+.bottom-info {
+    font-family: 'GTLight', sans-serif;
+    font-size: 0.9rem;
+    color: var(--white);
+    padding: 1rem 2rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent);
+}
+
+.copyright, .website-info {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    letter-spacing: -0.03em;
+}
+
+.scroll-indicator {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+}
+
+.mouse {
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
+    animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+    0%, 100% { transform: translateY(-15px); opacity: 0; }
+    50% { transform: translateY(15px); opacity: 1; }
+}
+
+/* Visi Misi Section */
+#visi-misi {
+    background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+    color: var(--blue-dark);
+    padding: 6rem 0;
+}
+
+#visi-misi h2 {
+    font-family: 'GTBlack', sans-serif;
+    font-size: 4rem;
     text-transform: uppercase;
-    transition: transform 0.3s ease;
-    will-change: transform;
-    text-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    color: var(--blue-primary);
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Animated elements */
-.animated-element {
-    will-change: transform, opacity;
-    pointer-events: none;
+#visi-misi .lead {
+    font-family: 'GTLight', sans-serif;
+    font-size: 1.3rem;
+    color: #6c757d;
 }
 
-/* Responsive styles */
+#visi-misi h3 {
+    font-family: 'GTMedium', sans-serif;
+    font-size: 2.2rem;
+    color: var(--blue-dark);
+    margin-bottom: 1.5rem;
+}
+
+#visi-misi .card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#visi-misi .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+#visi-misi ul li {
+    font-family: 'GTLight', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    position: relative;
+    padding-left: 1.5rem;
+    color: #495057;
+}
+
+#visi-misi ul li .bullet {
+    color: var(--blue-primary);
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0;
+}
+
+/* Sejarah Section */
+#sejarah {
+    background: linear-gradient(135deg, var(--blue-dark), #1a2a44);
+    color: white;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.sejarah-container {
+    align-items: center;
+}
+
+.sejarah-title {
+    font-family: 'GTBlack', sans-serif;
+    font-size: 10rem;
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: -4px;
+    color: var(--blue-light);
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.sejarah-year-wrapper {
+    margin-top: -1rem;
+}
+
+.sejarah-text {
+    font-family: 'Saol', serif;
+    font-style: italic;
+    font-size: 4.5rem;
+    color: var(--blue-light);
+    margin-right: 1rem;
+}
+
+.sejarah-year {
+    font-family: 'GTBlack', sans-serif;
+    font-size: 10rem;
+    line-height: 1;
+    color: var(--blue-light);
+}
+
+.sejarah-right p {
+    font-family: 'GTLight', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.selengkapnya {
+    font-family: 'GTMedium', sans-serif;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.selengkapnya:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+/* Divider Section */
+.divider-section {
+    background: linear-gradient(to bottom, #1a2a44, var(--blue-dark));
+    min-height: 30vh;
+}
+
+.divider-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeInUp 1.5s ease forwards 0.5s;
+}
+
+.divider-line {
+    height: 2px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0));
+    flex: 1;
+    max-width: 40%;
+    transform: scaleX(0);
+    animation: scaleIn 1.5s ease forwards 0.8s;
+}
+
+.divider-diamond {
+    width: 12px;
+    height: 12px;
+    background-color: var(--blue-light);
+    transform: rotate(45deg);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    animation: diamondPulse 2s infinite ease-in-out;
+}
+
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+    to { transform: scaleX(1); }
+}
+
+@keyframes diamondPulse {
+    0% { transform: rotate(45deg) scale(1); box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
+    50% { transform: rotate(45deg) scale(1.3); box-shadow: 0 0 30px rgba(255, 255, 255, 1); }
+    100% { transform: rotate(45deg) scale(1); box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
+}
+
+/* Struktur Organisasi Section */
+#struktur {
+    background: linear-gradient(to bottom, var(--blue-dark), #1a2a44);
+    padding: 8rem 0;
+}
+
+.struktur-title {
+    font-family: 'GTBlack', sans-serif;
+    font-size: 11rem;
+    color: var(--blue-light);
+    text-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    margin-bottom: 2rem;
+}
+
+#struktur .lead {
+    font-family: 'GTLight', sans-serif;
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.struktur-image-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.struktur-image-wrapper:hover {
+    transform: scale(1.03);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Nilai Section */
+#nilai {
+    min-height: 800px;
+    background: var(--blue-dark);
+}
+
+.nilai-bg {
+    background: linear-gradient(to bottom, rgba(26, 42, 68, 0.8), var(--blue-dark)), url('/images/pages/about/team-bg.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.9;
+    z-index: 0;
+}
+
+.nilai-content {
+    padding: 5rem 0;
+    min-height: 800px;
+    position: relative;
+    z-index: 1;
+}
+
+.nilai-text-col {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 50%;
+    transform: translateY(-50%);
+}
+
+.nilai-text-content {
+    padding-left: 12rem;
+}
+
+.nilai-title, .nilai-subtitle {
+    font-family: 'GTBlack', sans-serif;
+    font-size: 6rem;
+    color: white;
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: -4px;
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.nilai-title {
+    margin-bottom: -1rem;
+}
+
+.nilai-image-col {
+    position: absolute;
+    top: 50px;
+    right: 80px;
+    width: 55%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nilai-image-wrapper {
+    max-width: 700px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.nilai-image-wrapper:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1400px) {
+    .hero-text { font-size: 22rem; }
+    .subtitle { font-size: 2.8rem; word-spacing: 12rem; }
+    .sejarah-title, .sejarah-year { font-size: 9rem; }
+    .struktur-title { font-size: 10rem; }
+    .nilai-title, .nilai-subtitle { font-size: 5rem; }
+}
+
 @media (max-width: 1200px) {
-    .himasif-text {
-        font-size: 15rem;
-    }
+    .hero-text { font-size: 18rem; }
+    .subtitle { font-size: 2.5rem; word-spacing: 10rem; }
+    .sejarah-title, .sejarah-year { font-size: 7rem; }
+    .struktur-title { font-size: 8rem; }
+    .nilai-text-content { padding-left: 8rem; }
+}
 
-    .tentang-text {
-        font-size: 4rem;
-    }
+@media (max-width: 991px) {
+    .hero-text { font-size: 14rem; }
+    .subtitle { font-size: 2rem; word-spacing: 8rem; }
+    .sejarah-container { flex-direction: column; text-align: center; }
+    .sejarah-title, .sejarah-year { font-size: 6rem; }
+    .struktur-title { font-size: 7rem; }
+    .nilai-text-col, .nilai-image-col { position: static; width: 100%; }
+    .nilai-text-content { padding-left: 0; text-align: center; padding-bottom: 2rem; }
 }
 
 @media (max-width: 768px) {
-    .himasif-text {
-        font-size: 10rem;
-    }
-
-    .tentang-text {
-        font-size: 3rem;
-    }
+    .hero-text { font-size: 10rem; }
+    .subtitle { font-size: 1.6rem; word-spacing: 3rem; }
+    .sejarah-title, .sejarah-year { font-size: 5rem; }
+    .struktur-title { font-size: 6rem; }
+    .nilai-title, .nilai-subtitle { font-size: 3.5rem; }
 }
 
 @media (max-width: 576px) {
-    .himasif-text {
-        font-size: 6rem;
-    }
-
-    .tentang-text {
-        font-size: 2.5rem;
-    }
+    .hero-text { font-size: 7rem; }
+    .subtitle { font-size: 1.2rem; word-spacing: 2rem; }
+    .sejarah-title, .sejarah-year { font-size: 4rem; }
+    .struktur-title { font-size: 4.5rem; }
+    .nilai-title, .nilai-subtitle { font-size: 2.5rem; }
 }
