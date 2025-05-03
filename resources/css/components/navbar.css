@@ -8,24 +8,25 @@
     justify-content: space-between;
     padding: 0 20px;  /* Changed from 8rem to 20px */
     text-transform: uppercase;
-    transition: all 0.3s ease, transform 0.4s ease-in-out;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease, backdrop-filter 0.3s ease;
     position: fixed;
     width: 100%;
     left: 0;  /* Added to ensure full width */
     right: 0;  /* Added to ensure full width */
     top: 0;
-    z-index: 50;
-    background-color: transparent;
-    backdrop-filter: blur(0px);
-    -webkit-backdrop-filter: blur(0px);
+    z-index: 1000; /* Increased z-index to ensure navbar is always on top */
+    background-color: rgba(0, 0, 0, 0.1); /* Light initial background */
+    backdrop-filter: blur(5px); /* Light initial blur */
+    -webkit-backdrop-filter: blur(5px);
     transform: translateY(0); /* Initial position */
+    will-change: transform; /* Optimize for animations */
 }
 
 .navbar.scrolled {
-    background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(0, 0, 0, 0.2); /* Added semi-transparent background */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Class for hiding navbar when scrolling down */

@@ -271,15 +271,23 @@
     white-space: nowrap;
     will-change: transform;
     width: 100%;
+    display: flex;
 }
 
 /* Marquee Content */
 .marquee-content {
-    display: inline-block;
+    display: flex;
     font-family: 'GTBlack', sans-serif;
     text-transform: uppercase;
     white-space: nowrap;
     line-height: 0.9; /* Reduced line height to make text more compact */
+    width: 100%;
+}
+
+/* Marquee Set - Container for a set of items */
+.marquee-set {
+    display: inline-flex;
+    white-space: nowrap;
 }
 
 /* Marquee Content Item (dynamically created) */
@@ -288,31 +296,33 @@
     text-transform: uppercase;
     white-space: nowrap;
     line-height: 0.9;
-}
-
-/* Special styling for row 2 items */
-.row2-item {
-    margin-right: 0; /* No margin between items for seamless appearance */
-    transition: transform 0.3s ease; /* Smooth transition for any transforms */
+    display: inline-block;
+    padding-right: 0.5rem; /* Minimal space between repeated text for seamless loop */
+    will-change: transform; /* Optimize for animations */
+    transition: transform 0.2s ease; /* Smooth transition for skew effect */
+    letter-spacing: -0.02em; /* Slightly tighter letter spacing */
 }
 
 /* Styling for each row */
 .marquee-row-1 .marquee-content-item {
     font-size: 6.5rem; /* Increased for better proportion */
     color: var(--blue-light);
+    transform-origin: center left; /* For skew effect */
 }
 
 .marquee-row-2 .marquee-content-item {
     font-size: 7.5rem; /* Increased for better proportion */
     color: var(--blue-light); /* Same color as other rows */
+    transform-origin: center left; /* For skew effect */
+    letter-spacing: -0.03em; /* Tighter letter spacing for row 2 */
+    padding-right: 0.8rem; /* More space between items for row 2 */
 }
 
 .marquee-row-3 .marquee-content-item {
     font-size: 6.5rem; /* Increased for better proportion */
     color: var(--blue-light);
+    transform-origin: center left; /* For skew effect */
 }
-
-/* No hover effects */
 
 /* Responsive styles */
 @media (max-width: 1400px) {

@@ -1,4 +1,14 @@
-@vite(['resources/css/components/navbar.css'])
+@vite(['resources/css/components/navbar.css', 'resources/js/navbar.js'])
+
+<script>
+    // Ensure navbar auto-hide functionality works
+    document.addEventListener('DOMContentLoaded', function() {
+        // Force a scroll event after a short delay
+        setTimeout(function() {
+            window.dispatchEvent(new Event('scroll'));
+        }, 100);
+    });
+</script>
 
 <nav class="navbar">
     <div class="container-fluid">
@@ -63,98 +73,3 @@
         </div>
     </div>
 </nav>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const navbar = document.querySelector('.navbar');
-        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-        const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
-        const mobileMenuClose = document.querySelector('.mobile-menu-close');
-        const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
-
-        // Variables for scroll direction detection
-        let lastScrollTop = 0;
-        let scrollThreshold = 50; // Minimum scroll amount to trigger hide/show
-        let scrollTimeout;
-
-        // Scroll event for navbar background and auto-hide
-        window.addEventListener('scroll', function() {
-            // Handle background blur effect
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-                navbar.classList.remove('nav-hidden'); // Always show navbar at top of page
-                lastScrollTop = window.scrollY;
-                return;
-            }
-
-            // Handle auto-hide based on scroll direction
-            clearTimeout(scrollTimeout);
-
-            // Determine scroll direction
-            const currentScrollTop = window.scrollY;
-            const scrollingDown = currentScrollTop > lastScrollTop;
-            const scrollDifference = Math.abs(currentScrollTop - lastScrollTop);
-
-            // Only trigger if scroll amount is significant
-            if (scrollDifference > scrollThreshold) {
-                if (scrollingDown) {
-                    // Scrolling down - hide navbar
-                    navbar.classList.add('nav-hidden');
-                } else {
-                    // Scrolling up - show navbar
-                    navbar.classList.remove('nav-hidden');
-                }
-
-                // Update last scroll position
-                lastScrollTop = currentScrollTop;
-            }
-
-            // Set a timeout to show navbar after scrolling stops
-            scrollTimeout = setTimeout(function() {
-                // If user hasn't scrolled for a while, show navbar
-                navbar.classList.remove('nav-hidden');
-            }, 3000); // Show navbar after 3 seconds of no scrolling
-        });
-
-        // Mobile menu toggle
-        mobileMenuToggle.addEventListener('click', function() {
-            document.body.classList.add('menu-open');
-            mobileMenuOverlay.classList.add('active');
-            // Always show navbar when mobile menu is open
-            navbar.classList.remove('nav-hidden');
-        });
-
-        // Mobile menu close
-        mobileMenuClose.addEventListener('click', function() {
-            document.body.classList.remove('menu-open');
-            mobileMenuOverlay.classList.remove('active');
-        });
-
-        // Mobile dropdown toggles
-        mobileDropdownToggles.forEach(toggle => {
-            toggle.addEventListener('click', function() {
-                const parent = this.parentElement;
-                const dropdownMenu = parent.querySelector('.mobile-dropdown-menu');
-
-                // Close other open dropdowns
-                document.querySelectorAll('.mobile-dropdown.active').forEach(dropdown => {
-                    if (dropdown !== parent) {
-                        dropdown.classList.remove('active');
-                        dropdown.querySelector('.mobile-dropdown-menu').style.maxHeight = '0px';
-                    }
-                });
-
-                // Toggle current dropdown
-                parent.classList.toggle('active');
-
-                if (parent.classList.contains('active')) {
-                    dropdownMenu.style.maxHeight = dropdownMenu.scrollHeight + 'px';
-                } else {
-                    dropdownMenu.style.maxHeight = '0px';
-                }
-            });
-        });
-    });
-</script>

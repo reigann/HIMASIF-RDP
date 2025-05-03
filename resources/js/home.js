@@ -495,206 +495,233 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Marquee Text Divider Animation
+    // Improved Marquee Text Divider Animation with Infinite Loop
     const initMarqueeDivider = () => {
         const marqueeDivider = document.querySelector('.marquee-divider');
         if (!marqueeDivider) return;
 
-        const marqueeContents = marqueeDivider.querySelectorAll('.marquee-content');
+        // Configuration
         const text = 'HIMASIF SIF360 ';
+        const baseSpeed = 1; // Moderate base speed for smooth scrolling
+        const scrollMultiplier = 0.5; // Moderate scroll effect
+        const skewMultiplier = 0.6; // Reduced skew for smoother appearance
+        const maxSkew = 10; // Reduced maximum skew angle for smoother appearance
 
-        // Create duplicate elements for infinite scrolling
-        const setupInfiniteScroll = () => {
-            // For each row, create content elements for seamless looping
+        // Create marquee items for each row - using two identical sets of content
+        const createMarqueeItems = () => {
             const rows = marqueeDivider.querySelectorAll('.marquee-row');
 
-            rows.forEach((row, index) => {
-                const track = row.querySelector('.marquee-track');
+            rows.forEach((row, rowIndex) => {
                 const content = row.querySelector('.marquee-content');
+                if (!content) return;
 
                 // Clear existing content
-                if (content) {
-                    content.textContent = '';
+                content.innerHTML = '';
+
+                // Create a container for the first set of items
+                const firstSet = document.createElement('div');
+                firstSet.className = 'marquee-set';
+                firstSet.style.display = 'inline-block';
+
+                // Create a container for the second set of items (identical to first)
+                const secondSet = document.createElement('div');
+                secondSet.className = 'marquee-set';
+                secondSet.style.display = 'inline-block';
+
+                // Calculate how many items we need to fill more than the screen width
+                const viewportWidth = window.innerWidth;
+                const itemWidth = 200; // Fixed estimate for consistency
+
+                // For row 2 (index 1), create more items
+                const multiplier = rowIndex === 1 ? 3.0 : 1.5; // Double items for row 2
+                const itemsNeeded = Math.ceil(viewportWidth * multiplier / itemWidth) + 4; // More buffer for row 2
+
+                // Create first set of items
+                for (let i = 0; i < itemsNeeded; i++) {
+                    const item = document.createElement('div');
+                    item.className = 'marquee-content-item';
+
+                    // For row 2, alternate between two different texts for more variety
+                    if (rowIndex === 1) {
+                        // Alternate between regular text and a longer version
+                        item.textContent = i % 2 === 0 ? text : text + text;
+                    } else {
+                        item.textContent = text;
+                    }
+
+                    firstSet.appendChild(item);
                 }
 
-                // For row 2 (index 1), we'll create multiple content elements for a different loop effect
-                if (index === 1) {
-                    // Create multiple content elements for row 2 to create a continuous loop
-                    // We'll create enough to fill the screen width multiple times
-                    for (let i = 0; i < 10; i++) {
-                        const contentClone = document.createElement('div');
-                        contentClone.className = 'marquee-content-item row2-item';
-                        contentClone.style.display = 'inline-block';
-                        contentClone.style.whiteSpace = 'nowrap';
+                // Clone the first set for the second set (exact duplicate)
+                for (let i = 0; i < itemsNeeded; i++) {
+                    const item = document.createElement('div');
+                    item.className = 'marquee-content-item';
 
-                        // For row 2, we use shorter repetitions as we'll have multiple elements
-                        contentClone.textContent = text.repeat(5);
-                        contentClone.style.color = 'var(--blue-light)';
-
-                        // Add to track
-                        if (track) {
-                            track.appendChild(contentClone);
-                        }
+                    // For row 2, alternate between two different texts for more variety
+                    if (rowIndex === 1) {
+                        // Alternate between regular text and a longer version
+                        item.textContent = i % 2 === 0 ? text : text + text;
+                    } else {
+                        item.textContent = text;
                     }
-                } else {
-                    // For rows 1 and 3, keep the original approach with two long content elements
-                    for (let i = 0; i < 2; i++) {
-                        const contentClone = document.createElement('div');
-                        contentClone.className = 'marquee-content-item';
-                        contentClone.style.display = 'inline-block';
-                        contentClone.style.whiteSpace = 'nowrap';
 
-                        // Add a lot of repetitions to ensure it's long enough
-                        const repetitions = 50; // Large number to ensure it's long enough
-                        contentClone.textContent = text.repeat(repetitions);
-                        contentClone.style.color = 'var(--blue-light)';
-
-                        // Add to track
-                        if (track) {
-                            track.appendChild(contentClone);
-                        }
-                    }
+                    secondSet.appendChild(item);
                 }
+
+                // Add both sets to the content
+                content.appendChild(firstSet);
+                content.appendChild(secondSet);
             });
         };
 
-        // Set up infinite scroll
-        setupInfiniteScroll();
+        // Create initial items
+        createMarqueeItems();
 
-        // Calculate content width for each row
-        const calculateContentWidths = () => {
-            const rows = marqueeDivider.querySelectorAll('.marquee-row');
-            const contentWidths = [];
-
-            rows.forEach(row => {
-                const contentItem = row.querySelector('.marquee-content-item');
-                if (contentItem) {
-                    contentWidths.push(contentItem.offsetWidth);
-                } else {
-                    contentWidths.push(0);
-                }
-            });
-
-            return contentWidths;
-        };
-
-        // Get content widths
-        const contentWidths = calculateContentWidths();
-
-        // Animation variables
-        let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        let scrollDirection = 0;
-        let scrollSpeed = 0;
-        let baseSpeed = 0.5; // Base speed when not scrolling
-
-        // Animation state for each row
-        const rows = [
-            { position: 0, direction: -1, speed: baseSpeed, element: marqueeDivider.querySelector('.marquee-row-1 .marquee-track') },
-            { position: 0, direction: 1, speed: baseSpeed * 0.8, element: marqueeDivider.querySelector('.marquee-row-2 .marquee-track') },
-            { position: 0, direction: -1, speed: baseSpeed * 1.2, element: marqueeDivider.querySelector('.marquee-row-3 .marquee-track') }
+        // Get all tracks and items after creation
+        const tracks = [
+            marqueeDivider.querySelector('.marquee-row-1 .marquee-track'),
+            marqueeDivider.querySelector('.marquee-row-2 .marquee-track'),
+            marqueeDivider.querySelector('.marquee-row-3 .marquee-track')
         ];
 
-        // Scroll event to control animation speed
-        window.addEventListener('scroll', () => {
-            const st = window.pageYOffset || document.documentElement.scrollTop;
-            scrollDirection = st > lastScrollTop ? 1 : -1;
+        const items = [
+            marqueeDivider.querySelectorAll('.marquee-row-1 .marquee-content-item'),
+            marqueeDivider.querySelectorAll('.marquee-row-2 .marquee-content-item'),
+            marqueeDivider.querySelectorAll('.marquee-row-3 .marquee-content-item')
+        ];
 
-            // Calculate scroll speed
-            const scrollDelta = Math.abs(st - lastScrollTop);
-            scrollSpeed = Math.min(scrollDelta / 10, 8); // Limit max speed
-
-            lastScrollTop = st;
-        });
-
-        // Skew effect based on scroll speed
-        const updateSkew = () => {
-            const skewIntensity = Math.min(Math.abs(scrollSpeed) * 0.7, 10);
-            const skewAngle = scrollDirection * skewIntensity;
-
-            gsap.to('.marquee-row-1 .marquee-content-item', {
-                skewX: -skewAngle,
-                duration: 0.3,
-                ease: 'power2.out'
+        // Calculate total width of all items in each row
+        const calculateTotalWidth = (rowItems) => {
+            let totalWidth = 0;
+            rowItems.forEach(item => {
+                totalWidth += item.offsetWidth;
             });
-
-            // For row 2, target the specific row2-item class
-            gsap.to('.row2-item', {
-                skewX: skewAngle,
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-
-            gsap.to('.marquee-row-3 .marquee-content-item', {
-                skewX: -skewAngle,
-                duration: 0.3,
-                ease: 'power2.out'
-            });
+            return totalWidth;
         };
+
+        // Get total widths
+        const totalWidths = [
+            calculateTotalWidth(items[0]),
+            calculateTotalWidth(items[1]),
+            calculateTotalWidth(items[2])
+        ];
+
+        // Animation state - slower speed for row 2
+        const rowStates = [
+            { position: 0, direction: -1, speed: baseSpeed * 1.0, totalWidth: totalWidths[0] },
+            { position: 0, direction: 1, speed: baseSpeed * 0.7, totalWidth: totalWidths[1] }, // Slower for row 2
+            { position: 0, direction: -1, speed: baseSpeed * 1.0, totalWidth: totalWidths[2] }
+        ];
+
+        // Scroll tracking
+        let lastScrollY = window.scrollY;
+        let scrollDirection = 0;
+        let scrollSpeed = 0;
+        let scrollTimeout;
+
+        // Listen for scroll events
+        window.addEventListener('scroll', () => {
+            // Calculate scroll direction and speed
+            const currentScrollY = window.scrollY;
+            scrollDirection = currentScrollY > lastScrollY ? 1 : -1;
+
+            // Calculate scroll speed (pixels per frame)
+            const scrollDelta = Math.abs(currentScrollY - lastScrollY);
+            scrollSpeed = Math.min(scrollDelta / 5, 15); // Limit max speed
+
+            // Update last scroll position
+            lastScrollY = currentScrollY;
+
+            // Clear existing timeout
+            clearTimeout(scrollTimeout);
+
+            // Set timeout to reset scroll speed after scrolling stops
+            scrollTimeout = setTimeout(() => {
+                scrollSpeed = 0;
+            }, 100);
+        });
 
         // Animation loop
         const animate = () => {
-            // Update speeds based on scroll
-            rows.forEach((row, index) => {
-                // Base speed + scroll influence
-                const targetSpeed = baseSpeed + (scrollSpeed * 0.5 * scrollDirection * row.direction);
-                // Smooth transition to target speed
-                row.speed += (targetSpeed - row.speed) * 0.1;
-
-                // Ensure row 2 always moves right
-                if (row === rows[1]) {
-                    row.speed = Math.abs(row.speed) * row.direction;
-                }
+            // For each row
+            rowStates.forEach((state, index) => {
+                // Calculate current speed based on base speed and scroll influence
+                const currentSpeed = (baseSpeed + (scrollSpeed * scrollMultiplier * scrollDirection)) * state.direction;
 
                 // Update position
-                row.position += row.speed;
+                state.position += currentSpeed;
 
-                // Apply transform
-                if (row.element) {
-                    row.element.style.transform = `translateX(${row.position * row.direction}px)`;
-                }
+                // Handle infinite loop with two copies of content approach
 
-                // Reset position for seamless infinite loop
-                if (index === 1) { // Special handling for row 2
-                    // Get all row2 items
-                    const row2Items = document.querySelectorAll('.row2-item');
-                    if (row2Items.length > 0) {
-                        // Get the width of a single item
-                        const itemWidth = row2Items[0].offsetWidth;
+                // Use a completely different approach with two copies of content that move together
+                // This eliminates any need for DOM manipulation during animation
 
-                        // When an item moves completely off-screen to the right
-                        if (row.position > itemWidth) {
-                            // Move the first item to the end to create a continuous loop
-                            const firstItem = row2Items[0];
-                            const track = row.element;
-                            if (track && firstItem) {
-                                track.appendChild(firstItem);
-                                // Reset position by the width of the moved item
-                                row.position -= itemWidth;
-                            }
-                        }
-                    }
-                } else {
-                    // For rows 1 and 3, use the original reset logic
-                    const contentWidth = contentWidths[index] || 0;
-                    if (Math.abs(row.position) >= contentWidth) {
-                        // Reset to create the illusion of infinite scrolling
-                        row.position = 0;
+                // For rows moving right (row 2)
+                if (state.direction > 0) {
+                    // When position exceeds the width of the content, reset to create loop
+                    const contentWidth = totalWidths[index] / 2; // We have 2 copies of the content
+
+                    // For row 2, use a smaller threshold to reset earlier
+                    // This ensures text doesn't appear to "run out" before looping
+                    const threshold = index === 1 ? contentWidth * 0.8 : contentWidth;
+
+                    if (state.position >= threshold) {
+                        // Simply reset position to beginning of second copy
+                        state.position = 0;
                     }
                 }
+                // For rows moving left (rows 1 and 3)
+                else {
+                    // When position (negative) exceeds the width of the content, reset to create loop
+                    const contentWidth = totalWidths[index] / 2; // We have 2 copies of the content
+
+                    if (Math.abs(state.position) >= contentWidth) {
+                        // Simply reset position to beginning
+                        state.position = 0;
+                    }
+                }
+
+                // Apply transform to track
+                if (tracks[index]) {
+                    tracks[index].style.transform = `translateX(${state.position}px)`;
+                }
+
+                // Apply skew effect based on scroll speed and direction
+                const skewAmount = Math.min(Math.abs(scrollSpeed * skewMultiplier), maxSkew) * (scrollDirection * -1);
+
+                // Apply different skew direction for middle row
+                const rowSkew = index === 1 ? skewAmount * -1 : skewAmount;
+
+                // Apply skew to all items in this row
+                items[index].forEach(item => {
+                    item.style.transform = `skewX(${rowSkew}deg)`;
+                });
             });
 
-            // Apply skew effect
-            updateSkew();
-
-            // Gradually reduce scroll speed when not scrolling
-            if (Math.abs(scrollSpeed) > 0.1) {
-                scrollSpeed *= 0.95;
-            } else {
-                scrollSpeed = 0;
-            }
-
+            // Continue animation
             requestAnimationFrame(animate);
         };
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            // Recreate items on resize
+            createMarqueeItems();
+
+            // Update references
+            items[0] = marqueeDivider.querySelectorAll('.marquee-row-1 .marquee-content-item');
+            items[1] = marqueeDivider.querySelectorAll('.marquee-row-2 .marquee-content-item');
+            items[2] = marqueeDivider.querySelectorAll('.marquee-row-3 .marquee-content-item');
+
+            // Recalculate widths
+            totalWidths[0] = calculateTotalWidth(items[0]);
+            totalWidths[1] = calculateTotalWidth(items[1]);
+            totalWidths[2] = calculateTotalWidth(items[2]);
+
+            // Update row states
+            rowStates[0].totalWidth = totalWidths[0];
+            rowStates[1].totalWidth = totalWidths[1];
+            rowStates[2].totalWidth = totalWidths[2];
+        });
 
         // Start animation
         animate();
